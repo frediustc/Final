@@ -10,37 +10,38 @@
   </div>
   <!-- Sidebar Navidation Menus--><span class="heading">Menu</span>
   <ul class="list-unstyled">
-    <li class="active"> <a href="./"><i class="icon-home"></i>Dashboard</a></li>
-    <li><a href="#studentLink" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>Students </a>
-      <ul id="studentLink" class="collapse list-unstyled">
-        <li><a href="Admin.Student.Add.php">Add</a></li>
-        <li><a href="Admin.Student.View.php">View</a></li>
-      </ul>
-    </li>
-    <li><a href="#staffLink" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>Staff </a>
-      <ul id="staffLink" class="collapse list-unstyled">
-        <li><a href="Admin.Staff.Add.php">Add</a></li>
-        <li><a href="Admin.Staff.View.php">View</a></li>
-      </ul>
-    </li>
-    <li><a href="#classRoomLink" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>ClassRooms </a>
+    <li class="active"> <a href="./"><i class="fa fa-user-circle-o"></i>Dashboard</a></li>
+    <li><a href="#classRoomLink" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-university"></i>ClassRooms </a>
       <ul id="classRoomLink" class="collapse list-unstyled">
         <li><a href="Admin.Room.Add.php">Add</a></li>
         <li><a href="Admin.Room.View.php">View</a></li>
       </ul>
     </li>
-    <li><a href="#CoursesLink" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>Courses </a>
+    <li><a href="#CoursesLink" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-graduation-cap"></i>Courses </a>
       <ul id="CoursesLink" class="collapse list-unstyled">
         <li><a href="Admin.Course.Add.php">Add</a></li>
         <li><a href="Admin.Course.View.php">View</a></li>
       </ul>
     </li>
-    <li><a href="#ModuleLink" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>Modules </a>
+    <li><a href="#ModuleLink" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-book"></i>Modules </a>
       <ul id="ModuleLink" class="collapse list-unstyled">
         <li><a href="Admin.Module.Add.php">Add</a></li>
         <li><a href="Admin.Module.View.php">View</a></li>
       </ul>
     </li>
+    <li><a href="#staffLink" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-black-tie"></i>Staff </a>
+      <ul id="staffLink" class="collapse list-unstyled">
+        <li><a href="Admin.Staff.Add.php">Add</a></li>
+        <li><a href="Admin.Staff.View.php">View</a></li>
+      </ul>
+    </li>
+    <li><a href="#studentLink" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-group"></i>Students </a>
+      <ul id="studentLink" class="collapse list-unstyled">
+        <li><a href="Admin.Student.Add.php">Add</a></li>
+        <li><a href="Admin.Student.View.php">View</a></li>
+      </ul>
+    </li>
+
     <li> <a href="tables.html"> <i class="icon-grid"></i>Tables </a></li>
     <li> <a href="charts.html"> <i class="fa fa-bar-chart"></i>Charts </a></li>
     <li> <a href="forms.html"> <i class="icon-padnote"></i>Forms </a></li>

@@ -20,7 +20,7 @@
     <link rel="shortcut icon" href="img/favicon.ico">
     <!-- Font Awesome CDN-->
     <!-- you can replace it by local Font Awesome-->
-    <script src="https://use.fontawesome.com/99347ac47f.js"></script>
+    <link rel="stylesheet" href="Css/fa47/css/font-awesome.css" id="theme-stylesheet">
     <!-- Font Icons CSS-->
     <link rel="stylesheet" href="https://file.myfontastic.com/da58YPMQ7U5HY8Rb6UxkNf/icons.css">
     <!-- Tweaks for older IEs--><!--[if lt IE 9]>

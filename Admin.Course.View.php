@@ -11,7 +11,7 @@
               </div>
             </div>
             <div class="card-header d-flex align-items-center">
-              <h3 class="h4">Course List</h3>
+              <h3 class="h4">Module List</h3>
             </div>
             <div class="card-body">
               <table class="table table-striped table-hover text-capitalize">
@@ -24,12 +24,32 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>EOM</td>
-                    <td>Essential Of Management</td>
-                    <td>PBO,ISA,ISO</td>
-                  </tr>
+                    <?php
+                    //display modules
+                    $courses = $db->prepare('SELECT * FROM Courses ORDER BY abbr');
+                    $courses->execute();
+                    $i = 0;
+                    while ($course = $courses->fetch()) { $i++; ?>
+                        <tr>
+                            <th scope="row"><?php echo $i; ?></th>
+                            <td><?php echo $course['abbr']; ?></td>
+                            <td><?php echo $course['name']; ?></td>
+                            <td>
+                                <?php
+                                    $modules = $db->prepare('
+                                    select modules.abbr from coursesmodules
+                                    inner join courses on courses.id = coursesmodules.cid
+                                    inner join modules on modules.id = coursesmodules.mid
+                                    where cid = ?
+                                    ');
+                                    $modules->execute(array($course['id']));
+                                    while ($module = $modules->fetch()) {
+                                        echo $module['abbr'] . ', ';
+                                    }
+                                 ?>
+                            </td>
+                        </tr>
+                    <?php } ?>
                 </tbody>
               </table>
             </div>
