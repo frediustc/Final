@@ -1,0 +1,17 @@
+/* your styles go here */
+section {
+    padding: 25px 0;
+}
+.card{
+    margin-bottom: 0;
+}
+.alert-list{
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    width: 300px;
+    font-size: 13px;
+}
+.alert-list .alert {
+    padding: 10px;
+}

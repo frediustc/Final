@@ -1,0 +1,6 @@
+<?php
+try {
+    $db = new PDO('mysql:host=localhost;dbname=Godwin', 'root', '');
+} catch (Exception $e) {
+    Die('Erreur : ' . $e->getMessage());
+}
