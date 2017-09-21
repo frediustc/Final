@@ -31,7 +31,7 @@
 
                     <?php
                     //loop trough all the students
-                    $users = $db->prepare('SELECT * FROM users ORDER BY fullname');
+                    $users = $db->prepare('SELECT * FROM users WHERE usertype = 1 ORDER BY fullname');
                     $users->execute();
 
                     while ($user = $users->fetch()) { ?>

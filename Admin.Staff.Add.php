@@ -1,4 +1,7 @@
 <?php include './PHP/include/head.php'; ?>
+<div class="alert-list">
+    <?php include 'PHP/Script/Admin.Staff.Insert.php'; ?>
+</div>
 <section>
     <div class="container-fluid">
         <div class="row">
@@ -16,41 +19,42 @@
                 </div>
                 <div class="card-body">
                   <form class="form-horizontal" method="post" action="Admin.Staff.Add.php">
-                    <div class="form-group row">
-                      <label class="col-sm-3 form-control-label">Full Name*</label>
-                      <div class="col-sm-9">
-                        <input type="text" name="fn" class="form-control" required>
-                      </div>
-                    </div>
-                    <div class="line"></div>
-                    <div class="form-group row">
-                      <label class="col-sm-3 form-control-label">Email*</label>
-                      <div class="col-sm-9">
-                        <input type="email" name="em" class="form-control" required>
-                      </div>
-                    </div>
-                    <div class="line"></div>
-                    <div class="form-group row">
-                      <label class="col-sm-3 form-control-label">Phone</label>
-                      <div class="col-sm-9">
-                        <input type="number" name="nb" class="form-control">
-                      </div>
-                    </div>
-                    <div class="line"></div>
-                    <div class="form-group row">
-                      <label class="col-sm-3 form-control-label">Gender*</label>
-                      <div class="col-sm-9">
-                        <div class="i-checks">
-                          <input id="genderMale" type="radio" value="M" name="gd" class="radio-template">
-                          <label for="genderMale">Male</label>
+                      <div class="form-group row">
+                        <label class="col-sm-3 form-control-label">Full Name*</label>
+                        <div class="col-sm-9">
+                          <input type="text" name="fn" class="form-control" <?php if ($hasVal): ?> value="<?php echo $_POST['fn']; ?>" <?php endif; ?>required>
                         </div>
-                        <div class="i-checks">
-                          <input id="genderFemale" type="radio" checked="" value="F" name="gd" class="radio-template">
-                          <label for="genderFemale">Female</label>
                       </div>
+                      <div class="line"></div>
+                      <div class="form-group row">
+                        <label class="col-sm-3 form-control-label">Email*</label>
+                        <div class="col-sm-9">
+                          <input type="email" name="em" class="form-control" <?php if ($hasVal): ?> value="<?php echo $_POST['em']; ?>" <?php endif; ?>required>
+                        </div>
                       </div>
-                    </div>
-                    <div class="line"></div>
+                      <div class="line"></div>
+                      <div class="form-group row">
+                        <label class="col-sm-3 form-control-label" <?php if ($hasVal && isset($_POST['fn'])): ?> value="<?php echo $_POST['fn']; ?>" <?php endif; ?>>Phone</label>
+                        <div class="col-sm-9">
+                          <input type="number" name="ph" class="form-control">
+                        </div>
+                      </div>
+                      <div class="line"></div>
+                      <div class="form-group row">
+                        <label class="col-sm-3 form-control-label">Gender*</label>
+                        <div class="col-sm-9">
+                          <div class="i-checks">
+                            <input id="genderMale" type="radio" checked="" value="M" name="gd" class="radio-template">
+                            <label for="genderMale">Male</label>
+                          </div>
+                          <div class="i-checks">
+                            <input id="genderFemale" type="radio" value="F" name="gd" class="radio-template">
+                            <label for="genderFemale">Female</label>
+                        </div>
+                        </div>
+                      </div>
+
+                    <!-- <div class="line"></div>
                     <div class="form-group row">
                       <label class="col-sm-3 form-control-label">Type*</label>
                       <div class="col-sm-9 select">
@@ -60,28 +64,22 @@
                           <option>Cachier</option>
                         </select>
                       </div>
-                    </div>
+                    </div> -->
                     <div class="line"></div>
                     <div class="form-group row">
-                      <label class="col-sm-3 form-control-label">Modules*</small></label>
+                      <label class="col-sm-3 form-control-label">Modules Teach*</small></label>
                       <div class="col-sm-9">
                         <div class="row">
+                            <?php
+                            //display available modules
+                            $modules = $db->prepare('SELECT id, abbr FROM Modules ORDER BY abbr');
+                            $modules->execute();
+                            while ($module = $modules->fetch()) { ?>
                             <div class="i-checks col-3">
-                              <input id="ISO" type="checkbox" value="" class="checkbox-template">
-                              <label for="ISO">ISO</label>
+                                <input id="<?php echo $module['abbr']; ?>" type="checkbox" value="<?php echo $module['id']; ?>" name="<?php echo $module['abbr']; ?>" class="checkbox-template">
+                                <label for="<?php echo $module['abbr']; ?>"><?php echo $module['abbr']; ?></label>
                             </div>
-                            <div class="i-checks col-3">
-                              <input id="ISA" type="checkbox" value="" class="checkbox-template">
-                              <label for="ISA">ISA</label>
-                            </div>
-                            <div class="i-checks col-3">
-                              <input id="DDW" type="checkbox" value="" class="checkbox-template">
-                              <label for="DDW">DDW</label>
-                            </div>
-                            <div class="i-checks col-3">
-                              <input id="PBO" type="checkbox" value="" class="checkbox-template">
-                              <label for="PBO">PBO</label>
-                            </div>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>
@@ -91,7 +89,7 @@
                       <div class="col-sm-9">
                         <div class="form-group">
                           <div class="input-group">
-                            <input type="number" name="fee" class="form-control" required><span class="input-group-addon">Ghc</span>
+                              <input type="text" name="sal" class="form-control" <?php if ($hasVal): ?> value="<?php echo $_POST['sal']; ?>" <?php endif; ?>required><span class="input-group-addon">Ghc</span>
                           </div>
                           <span class="help-block-none">Field with * are required</span>
                         </div>
@@ -101,7 +99,7 @@
                     <div class="form-group row">
                       <div class="col-sm-4 offset-sm-3">
                         <button type="reset" class="btn btn-secondary">Cancel</button>
-                        <button type="submit" class="btn btn-primary">Save changes</button>
+                        <button type="submit" class="btn btn-primary" name="addStaff">Save changes</button>
                       </div>
                     </div>
                   </form>

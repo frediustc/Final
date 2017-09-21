@@ -11,31 +11,57 @@
               </div>
             </div>
             <div class="card-header d-flex align-items-center">
-              <h3 class="h4">Staff List</h3>
+              <h3 class="h4">Students List</h3>
             </div>
             <div class="card-body">
               <table class="table table-striped table-hover text-capitalize">
                 <thead>
                   <tr>
+                    <th>#</th>
                     <th>Full Name</th>
                     <th>Email</th>
                     <th>Phone</th>
+                    <th>Pass</th>
                     <th>Gender</th>
-                    <th>Type</th>
-                    <th>Modules</th>
-                    <th>Salary</th>
+                    <th>Module</th>
+                    <th>Balance</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>Diomande dro freddy junior</td>
-                    <td>Frediustc@gmail.com</td>
-                    <td>0556161301</td>
-                    <td>Male</td>
-                    <td>Teacher</td>
-                    <td>PBO,ISO,ISA,DW,DDW</td>
-                    <td>500 Ghc</td>
-                  </tr>
+
+                    <?php
+                    //loop trough all the students
+                    $users = $db->prepare('SELECT * FROM users WHERE usertype = 2 ORDER BY fullname');
+                    $users->execute();
+
+                    while ($user = $users->fetch()) { ?>
+
+                    <tr>
+                      <th scope="row"><?php echo $user['id']; ?></th>
+                      <td><?php echo $user['fullname']; ?></td>
+                      <td><?php echo $user['email']; ?></td>
+                      <td><?php echo $user['phone']; ?></td>
+                      <td><?php echo $user['initpass']; ?></td>
+                      <td><?php echo $user['gender']; ?></td>
+                      <td>
+                      <?php
+                        //display modules
+                          $modules = $db->prepare('
+                          select modules.abbr from teachermodules
+                          inner join users on users.id = teachermodules.uid
+                          inner join modules on modules.id = teachermodules.mid
+                          where uid = ?
+                          ');
+                          $modules->execute(array($user['id']));
+                          while ($module = $modules->fetch()) {
+                              echo $module['abbr'] . ', ';
+                          }
+                          ?>
+                      </td>
+                      <td><?php echo $user['salary']; ?>Ghc</td>
+                    </tr>
+                    <?php } ?>
+
                 </tbody>
               </table>
             </div>
