@@ -21,6 +21,7 @@ if(isset($_POST['addCourse'])){
 
     $abbr = htmlspecialchars(trim($_POST['abbr']));
     $name = htmlspecialchars(trim($_POST['name']));
+    $price = htmlspecialchars(trim($_POST['price']));
 
     //check if the Abbr format is correct (letter within 2 and 5 char)
     if(!preg_match('/[a-zA-Z]{2,8}/', $abbr)) {
@@ -34,9 +35,15 @@ if(isset($_POST['addCourse'])){
         echo '<div class="alert alert-danger" role="alert"><strong>Name Wrong Format!</strong> 2 - 100 letters, numbers and spaces only</div>';
     }
 
+    //check if the Name format is correct (letter within 2 and 10 char)
+    if(!preg_match('/^[0-9]+(\.)?[0-9]+$/', $price) || (strlen($price) < 1 || strlen($price) > 10)) {
+        $correct = false;
+        echo '<div class="alert alert-danger" role="alert"><strong>Price Wrong Format!</strong> "5.5" format allow</div>';
+    }
+
     //check if the module does not exist
     $check = $db->prepare('SELECT COUNT(*) AS nbr FROM Courses WHERE abbr = ? OR name = ?');
-    $check->execute(array($abbr, $correct));
+    $check->execute(array($abbr, $name));
     $result = $check->fetch();
     if($result['nbr'] > 0){
         $correct = false;
@@ -45,8 +52,8 @@ if(isset($_POST['addCourse'])){
 
     //if all is alright ($correct === true) we insert the value
     if($correct){
-        $add = $db->prepare('INSERT INTO Courses(abbr, name) VALUES(?, ?)');
-        if($add->execute(array(strtoupper($abbr), ucwords($name)))){
+        $add = $db->prepare('INSERT INTO Courses(abbr, name, price) VALUES(?, ?, ?)');
+        if($add->execute(array(strtoupper($abbr), ucwords($name), $price))){
             $id = $db->lastInsertId();
 
             //insert the courseid and module id

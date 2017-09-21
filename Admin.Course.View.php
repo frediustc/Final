@@ -20,6 +20,7 @@
                     <th>#</th>
                     <th>Abbr</th>
                     <th>Name</th>
+                    <th>Price</th>
                     <th>Modules</th>
                   </tr>
                 </thead>
@@ -34,6 +35,7 @@
                             <th scope="row"><?php echo $i; ?></th>
                             <td><?php echo $course['abbr']; ?></td>
                             <td><?php echo $course['name']; ?></td>
+                            <td><?php echo $course['price']; ?>Ghc</td>
                             <td>
                                 <?php
                                     $modules = $db->prepare('

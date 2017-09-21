@@ -20,12 +20,19 @@
                 <div class="card-body">
                   <form method="post" action="Admin.Course.Add.php">
                     <div class="form-group">
-                      <label for="inlineFormInput">Course Abbr</label>
-                      <input id="inlineFormInput" type="text" name="abbr" placeholder="Ex: L4DB" <?php if ($hasVal): ?> value="<?php echo $_POST['abbr']; ?>" <?php endif; ?>class="form-control" required>
+                      <label for="ca">Course Abbr</label>
+                      <input id="ca" type="text" name="abbr" placeholder="Ex: L4DB" <?php if ($hasVal): ?> value="<?php echo $_POST['abbr']; ?>" <?php endif; ?>class="form-control" required>
                     </div>
                     <div class="form-group">
-                      <label for="inlineFormInput">Course Name</label>
-                      <input id="inlineFormInput" type="text" name="name" placeholder="Ex: Level 4 Diploma Business" <?php if ($hasVal): ?> value="<?php echo $_POST['name']; ?>" <?php endif; ?>class="form-control" required>
+                      <label for="cn">Course Name</label>
+                      <input id="cn" type="text" name="name" placeholder="Ex: Level 4 Diploma Business" <?php if ($hasVal): ?> value="<?php echo $_POST['name']; ?>" <?php endif; ?>class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="cp">Price</label>
+                      <div class="input-group">
+                          <input id="cp" type="text" name="price" placeholder="Ex: 2000" <?php if ($hasVal): ?> value="<?php echo $_POST['price']; ?>" <?php endif; ?>class="form-control" required>
+                          <span class="input-group-addon">Ghc</span>
+                      </div>
                     </div>
                     <div class="form-group row">
                       <label class="col-sm-3 form-control-label">Modules</small></label>

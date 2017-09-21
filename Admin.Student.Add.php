@@ -1,4 +1,7 @@
 <?php include './PHP/include/head.php'; ?>
+<div class="alert-list">
+    <?php include 'PHP/Script/Admin.Student.Insert.php'; ?>
+</div>
 <section>
     <div class="container-fluid">
         <div class="row">
@@ -19,21 +22,21 @@
                     <div class="form-group row">
                       <label class="col-sm-3 form-control-label">Full Name*</label>
                       <div class="col-sm-9">
-                        <input type="text" name="fn" class="form-control" required>
+                        <input type="text" name="fn" class="form-control" <?php if ($hasVal): ?> value="<?php echo $_POST['fn']; ?>" <?php endif; ?>required>
                       </div>
                     </div>
                     <div class="line"></div>
                     <div class="form-group row">
                       <label class="col-sm-3 form-control-label">Email*</label>
                       <div class="col-sm-9">
-                        <input type="email" name="em" class="form-control" required>
+                        <input type="email" name="em" class="form-control" <?php if ($hasVal): ?> value="<?php echo $_POST['em']; ?>" <?php endif; ?>required>
                       </div>
                     </div>
                     <div class="line"></div>
                     <div class="form-group row">
-                      <label class="col-sm-3 form-control-label">Phone</label>
+                      <label class="col-sm-3 form-control-label" <?php if ($hasVal && isset($_POST['fn'])): ?> value="<?php echo $_POST['fn']; ?>" <?php endif; ?>>Phone</label>
                       <div class="col-sm-9">
-                        <input type="number" name="nb" class="form-control">
+                        <input type="number" name="ph" class="form-control">
                       </div>
                     </div>
                     <div class="line"></div>
@@ -41,11 +44,11 @@
                       <label class="col-sm-3 form-control-label">Gender*</label>
                       <div class="col-sm-9">
                         <div class="i-checks">
-                          <input id="genderMale" type="radio" value="M" name="gd" class="radio-template">
+                          <input id="genderMale" type="radio" checked="" value="Male" name="gd" class="radio-template">
                           <label for="genderMale">Male</label>
                         </div>
                         <div class="i-checks">
-                          <input id="genderFemale" type="radio" checked="" value="F" name="gd" class="radio-template">
+                          <input id="genderFemale" type="radio" value="Female" name="gd" class="radio-template">
                           <label for="genderFemale">Female</label>
                       </div>
                       </div>
@@ -54,11 +57,14 @@
                     <div class="form-group row">
                       <label class="col-sm-3 form-control-label">Course*</label>
                       <div class="col-sm-9 select">
-                        <select name="account" class="form-control" required>
-                          <option>L4DB</option>
-                          <option>L4DBIT</option>
-                          <option>L5DB</option>
-                          <option>L5DBIT</option>
+                        <select name="crs" class="form-control" required>
+                            <?php
+                            //display available courses
+                            $courses = $db->prepare('SELECT id, abbr FROM Courses ORDER BY abbr');
+                            $courses->execute();
+                            while ($course = $courses->fetch()) { ?>
+                            <option value="<?php echo $course['id']; ?>"><?php echo $course['abbr']; ?></option>
+                            <?php } ?>
                         </select>
                       </div>
                     </div>
@@ -68,7 +74,7 @@
                       <div class="col-sm-9">
                         <div class="form-group">
                           <div class="input-group">
-                            <input type="number" name="fee" class="form-control" required><span class="input-group-addon">Ghc</span>
+                            <input type="text" name="fee" class="form-control" <?php if ($hasVal): ?> value="<?php echo $_POST['fee']; ?>" <?php endif; ?>required><span class="input-group-addon">Ghc</span>
                           </div>
                           <span class="help-block-none">Field with * are required</span>
                         </div>
@@ -78,7 +84,7 @@
                     <div class="form-group row">
                       <div class="col-sm-4 offset-sm-3">
                         <button type="reset" class="btn btn-secondary">Cancel</button>
-                        <button type="submit" class="btn btn-primary">Save changes</button>
+                        <button type="submit" class="btn btn-primary" name="addStudent">Save changes</button>
                       </div>
                     </div>
                   </form>
