@@ -16,3 +16,9 @@ section {
 .alert-list .alert {
     padding: 10px;
 }
+.timetable aside{
+    width: 160px;
+}
+.timetable section{
+    width: calc(100% - 160px);
+}
