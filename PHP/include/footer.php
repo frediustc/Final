@@ -6,27 +6,41 @@
 <script src="js/jquery.min.js"></script>
 <script src="js/tether.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
-<!-- <script src="js/jquery.cookie.js"> </script> -->
-<!-- <script src="js/jquery.validate.min.js"></script> -->
+<script src="js/jquery.cookie.js"> </script>
+<script src="js/jquery.validate.min.js"></script>
 <!-- <script src="js/Chart.min.js"></script>
 <script src="js/charts-home.js"></script> -->
-<!-- <script src="js/front.js"></script> -->
+<script src="js/front.js"></script>
 <script src="js/timetable.min.js"></script>
 
 <script type="text/javascript">
     var timetable = new Timetable();
+    var days = [];
+    var color = [];
+    <?php
+    $daysSel = $db->prepare('SELECT * FROM days');
+    $daysSel->execute();
+    while ($daySel = $daysSel->fetch()) { ?>
+        days.push('<?php echo $daySel['day']; ?>');
+    <?php } ?>
     timetable.setScope(8, 19);
-    timetable.addLocations(['Silent Disco', 'Nile', 'Len Room', 'Maas Room']);
-    timetable.addEvent('Frankadelic', 'Nile', new Date(2015,7,17,10,45), new Date(2015,7,17,12,30));
-    var options = {
-      url: '#',
-      class: 'vip',
-      data: {
-        id: 4,
-        ticketType: 'VIP'
-      }
-    }
-    timetable.addEvent('Jam Session', 'Nile', new Date(2015,7,17,16,00), new Date(2015,7,17,17,00), options);
+    timetable.addLocations(days);
+
+    <?php
+
+
+    //loop through the events
+    $events = $db->prepare('SELECT * FROM timetable WHERE rid = ?');
+    $events->execute(array($_SESSION['rv']));
+    while ($event = $events->fetch()) { ?>
+        timetable.addEvent(
+            '<?php echo $event['c'] . ' (' .$event['module'] . ')'; ?>', //module abbr as title of the event
+            '<?php echo $event['day']; ?>', //day of the classs
+            new Date(0,0,0,<?php echo $event['sh']; ?>,<?php echo $event['sm']; ?>), //starting time
+            new Date(0,0,0,<?php echo $event['eh']; ?>,<?php echo $event['em']; ?>) //ending time
+        );
+    <?php } ?>
+    //display the timetable
     var renderer = new Timetable.Renderer(timetable);
     renderer.draw('.timetable');
 </script>

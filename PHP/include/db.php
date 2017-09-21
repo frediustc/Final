@@ -1,4 +1,5 @@
 <?php
+session_start();
 try {
     $db = new PDO('mysql:host=localhost;dbname=Godwin', 'root', '');
 } catch (Exception $e) {

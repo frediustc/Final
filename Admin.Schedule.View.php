@@ -1,4 +1,7 @@
 <?php include './PHP/include/head.php'; ?>
+<div class="alert-list">
+    <?php include 'PHP/Script/Admin.Schedule.Edit.php'; ?>
+</div>
 <section>
     <div class="container-fluid">
         <div class="row">
@@ -16,13 +19,13 @@
                           <h3 class="h4">Add Day</h3>
                         </div>
                         <div class="card-body">
-                          <form class="form-inline">
+                          <form class="form-inline" method="post" action="Admin.Schedule.View.php">
                             <div class="form-group">
-                              <label for="inlineFormInput" class="sr-only">Name</label>
-                              <input id="inlineFormInput" type="text" placeholder="Jane Doe" class="mr-3 form-control">
+                              <label for="inlineFormInput" class="sr-only">Day</label>
+                              <input id="inlineFormInput" type="text" name="day" placeholder="Monday" class="mr-3 form-control" required <?php if ($editDay): ?> value="<?php echo $_POST['day']; ?>" <?php endif; ?>>
                             </div>
                             <div class="form-group">
-                              <input type="submit" value="Submit" class="btn btn-primary">
+                              <input type="submit" value="Submit" name="addDay" class="btn btn-primary">
                             </div>
                           </form>
                         </div>
@@ -42,20 +45,20 @@
                           <h3 class="h4">Add Room</h3>
                         </div>
                         <div class="card-body">
-                          <form class="form-inline">
+                          <form class="form-inline" method="post" action="Admin.Schedule.View.php">
                             <div class="form-group">
                               <label for="inlineFormInput" class="sr-only">Name</label>
-                              <input id="inlineFormInput" type="text" placeholder="Jane Doe" class="mr-3 form-control">
+                              <input id="inlineFormInput" type="text" name="room" placeholder="Room 1" class="mr-3 form-control" required <?php if ($editRoom): ?> value="<?php echo $_POST['room']; ?>" <?php endif; ?>>
                             </div>
                             <div class="form-group">
-                              <input type="submit" value="Submit" class="btn btn-primary">
+                              <input type="submit" value="Submit" name="addRoom" class="btn btn-primary">
                             </div>
                           </form>
                         </div>
                       </div>
                     </div>
                 </div>
-                <div class="row mt-4">
+                <div class="row mt-4 mb-4">
                     <div class="col-12">
                       <div class="card">
                         <div class="card-close">
@@ -68,15 +71,26 @@
                           <h3 class="h4">TimeTable View</h3>
                         </div>
                         <div class="card-body">
-                          <form class="">
+                          <form class="roomViewForm" method="post" action="Admin.Schedule.View.php">
                             <label class="form-control-label">Rooms</label>
-                            <div class="">
-                                <select name="account" class="form-control">
-                                  <option>option 1</option>
-                                  <option>option 2</option>
-                                  <option>option 3</option>
-                                  <option>option 4</option>
+                            <div class="form-group">
+                                <select name="rid" class="roomView form-control">
+                                <?php
+                                $roomsView = $db->prepare('SELECT * FROM rooms ORDER BY room');
+                                $roomsView->execute();
+                                while ($roomView = $roomsView->fetch()) { ?>
+                                    <option
+                                    value="<?php echo $roomView['id']; ?>"
+                                    <?php if($_SESSION['rv'] == $roomView['id']){
+                                            echo ' selected';
+                                        } ?>
+                                    >
+                                    <?php echo $roomView['room']; ?> </option>
+                                <?php } ?>
                                 </select>
+                            </div>
+                            <div class="form-group">
+                              <input type="submit" value="Submit" name="changeRoom" class="btn btn-primary">
                             </div>
                           </form>
                         </div>
@@ -99,48 +113,75 @@
                           <h3 class="h4">Add Activity</h3>
                         </div>
                         <div class="card-body">
-                          <form class="form-horizontal">
+                          <form class="form-horizontal" method="post" action="Admin.Schedule.View.php">
+                              <div class="form-group row">
+                                <label class="col-sm-3 form-control-label">Module</label>
+                                <div class="col-sm-9">
+                                    <select name="m" class="form-control">
+                                    <?php
+                                    $modulesSel = $db->prepare('SELECT abbr FROM modules ORDER BY abbr');
+                                    $modulesSel->execute();
+                                    while ($moduleSel = $modulesSel->fetch()) { ?>
+                                        <option value="<?php echo $moduleSel['abbr']; ?>"><?php echo $moduleSel['abbr']; ?></option>
+                                    <?php } ?>
+                                    </select>
+                                </div>
+                              </div>
                             <div class="form-group row">
                               <label class="col-sm-3 form-control-label">Room</label>
                               <div class="col-sm-9">
-                                  <select name="account" class="form-control">
-                                    <option>option 1</option>
-                                    <option>option 2</option>
-                                    <option>option 3</option>
-                                    <option>option 4</option>
+                                  <select name="rid" class="form-control">
+                                  <?php
+                                  $roomsSel = $db->prepare('SELECT * FROM rooms ORDER BY room');
+                                  $roomsSel->execute();
+                                  while ($roomSel = $roomsSel->fetch()) { ?>
+                                      <option
+                                      value="<?php echo $roomSel['id']; ?>"
+                                      <?php if($_SESSION['rv'] == $roomSel['id']){
+                                              echo ' selected';
+                                          } ?>
+                                      >
+                                      <?php echo $roomSel['room']; ?></option>
+                                  <?php } ?>
                                   </select>
                               </div>
                             </div>
                             <div class="form-group row">
                               <label class="col-sm-3 form-control-label">Day</label>
                               <div class="col-sm-9">
-                                  <select name="account" class="form-control">
-                                    <option>option 1</option>
-                                    <option>option 2</option>
-                                    <option>option 3</option>
-                                    <option>option 4</option>
+                                  <select name="d" class="form-control">
+                                  <?php
+                                  $daysSel = $db->prepare('SELECT day FROM days');
+                                  $daysSel->execute();
+                                  while ($daySel = $daysSel->fetch()) { ?>
+                                      <option value="<?php echo $daySel['day']; ?>"><?php echo $daySel['day']; ?></option>
+                                  <?php } ?>
                                   </select>
                               </div>
                             </div>
                             <div class="form-group row">
-                              <label class="col-sm-3 form-control-label">Lvl</label>
+                              <label class="col-sm-3 form-control-label">Course</label>
                               <div class="col-sm-9">
-                                  <select name="account" class="form-control">
-                                    <option>option 1</option>
-                                    <option>option 2</option>
-                                    <option>option 3</option>
-                                    <option>option 4</option>
+                                  <select name="c" class="form-control">
+                                  <?php
+                                  $coursesSel = $db->prepare('SELECT abbr, id FROM courses ORDER BY abbr');
+                                  $coursesSel->execute();
+                                  while ($courseSel = $coursesSel->fetch()) { ?>
+                                      <option value="<?php echo $courseSel['abbr']; ?>"><?php echo $courseSel['abbr']; ?></option>
+                                  <?php } ?>
                                   </select>
                               </div>
                             </div>
                             <div class="form-group row">
                               <label class="col-sm-3 form-control-label">Teacher</label>
                               <div class="col-sm-9">
-                                  <select name="account" class="form-control">
-                                    <option>option 1</option>
-                                    <option>option 2</option>
-                                    <option>option 3</option>
-                                    <option>option 4</option>
+                                  <select name="uid" class="form-control">
+                                  <?php
+                                  $teachersSel = $db->prepare('SELECT fullname, id FROM users WHERE usertype = 2 ORDER BY fullname');
+                                  $teachersSel->execute();
+                                  while ($teacherSel = $teachersSel->fetch()) { ?>
+                                      <option value="<?php echo $teacherSel['id']; ?>"><?php echo $teacherSel['fullname']; ?></option>
+                                  <?php } ?>
                                   </select>
                               </div>
                             </div>
@@ -148,7 +189,7 @@
                               <label class="col-sm-3 form-control-label">Start Time</label>
                               <div class="col-sm-9">
                                   <div class="input-group bootstrap-timepicker">
-                                      <input type="text" class="form-control tp" id="st">
+                                      <input type="text" class="form-control tp" id="st" name="st" placeholder="12:05" required>
                                       <span class="input-group-btn"><button type="button" class="btn btn-primary"><span class="fa fa-clock-o"></span></button></span>
                                   </div>
                               </div>
@@ -157,14 +198,14 @@
                               <label class="col-sm-3 form-control-label">End Time</label>
                               <div class="col-sm-9">
                                   <div class="input-group bootstrap-timepicker">
-                                      <input type="text" class="form-control tp" id="et">
+                                      <input type="text" class="form-control tp" id="et" name="et" placeholder="12:05" required>
                                       <span class="input-group-btn"><button type="button" class="btn btn-primary"><span class="fa fa-clock-o"></span></button></span>
                                   </div>
                               </div>
                             </div>
                             <div class="form-group row">
                               <div class="col-sm-9 offset-sm-3">
-                                <input type="submit" value="Signin" class="btn-block btn btn-primary">
+                                <input type="submit" value="Add" name="addEvent" class="btn-block btn btn-primary">
                               </div>
                             </div>
                           </form>
