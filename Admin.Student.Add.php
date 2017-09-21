@@ -44,11 +44,11 @@
                       <label class="col-sm-3 form-control-label">Gender*</label>
                       <div class="col-sm-9">
                         <div class="i-checks">
-                          <input id="genderMale" type="radio" checked="" value="Male" name="gd" class="radio-template">
+                          <input id="genderMale" type="radio" checked="" value="M" name="gd" class="radio-template">
                           <label for="genderMale">Male</label>
                         </div>
                         <div class="i-checks">
-                          <input id="genderFemale" type="radio" value="Female" name="gd" class="radio-template">
+                          <input id="genderFemale" type="radio" value="F" name="gd" class="radio-template">
                           <label for="genderFemale">Female</label>
                       </div>
                       </div>

@@ -17,7 +17,7 @@ if(isset($_POST['addStudent'])){
     $em = strtolower(htmlspecialchars(trim($_POST['em'])));
     $fee = htmlspecialchars(trim($_POST['fee']));
     $ph = '';
-    echo '<div class="alert alert-danger" role="alert"><strong>'.$_POST['gd'].'</div>';
+    
     //check if phone format is good if inserted
     if(isset($_POST['ph']) && !empty($_POST['ph'])){
         $ph = htmlspecialchars(trim($_POST['ph']));

@@ -21,21 +21,61 @@
                     <th>Full Name</th>
                     <th>Email</th>
                     <th>Phone</th>
+                    <th>Pass</th>
                     <th>Gender</th>
                     <th>Course</th>
                     <th>Balance</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <th scope="row">000001</th>
-                    <td>Diomande dro freddy junior</td>
-                    <td>Frediustc@gmail.com</td>
-                    <td>0556161301</td>
-                    <td>Male</td>
-                    <td>L5DBIT</td>
-                    <td>500 Ghc</td>
-                  </tr>
+
+                    <?php
+                    //loop trough all the students
+                    $users = $db->prepare('SELECT * FROM users ORDER BY fullname');
+                    $users->execute();
+
+                    while ($user = $users->fetch()) { ?>
+
+                    <tr>
+                      <th scope="row"><?php echo $user['id']; ?></th>
+                      <td><?php echo $user['fullname']; ?></td>
+                      <td><?php echo $user['email']; ?></td>
+                      <td><?php echo $user['phone']; ?></td>
+                      <td><?php echo $user['initpass']; ?></td>
+                      <td><?php echo $user['gender']; ?></td>
+
+                      <?php
+                        //get the course of the current student
+                        $courses = $db->prepare('
+                        SELECT courses.abbr, courses.id
+                        FROM studentincourse
+                        INNER JOIN users ON users.id = studentincourse.uid
+                        INNER JOIN courses ON courses.id = studentincourse.cid
+                        WHERE studentincourse.uid = ?
+                        ORDER BY since DESC LIMIT 1
+                        ');
+                        $courses->execute(array($user['id']));
+                        $course = $courses->fetch();
+                        ?>
+
+                      <td><?php echo $course['abbr']; ?></td>
+
+                      <?php
+                          //get the balance of the current student
+                          $fees = $db->prepare('
+                          SELECT (
+                              (SELECT price FROM courses where abbr = ?) -
+                              (SELECT SUM(paid) FROM payment WHERE uid = ? AND cid = ?)
+                              ) AS balance
+                          ');
+                          $fees->execute(array($course['abbr'], $user['id'], $course['id']));
+                          $fee = $fees->fetch();
+                          ?>
+
+                      <td><?php echo $fee['balance']; ?>Ghc</td>
+                    </tr>
+                    <?php } ?>
+
                 </tbody>
               </table>
             </div>
