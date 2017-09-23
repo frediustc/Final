@@ -19,6 +19,7 @@
     <link rel="shortcut icon" href="img/favicon.ico">
     <!-- Font Awesome CDN-->
     <!-- you can replace it by local Font Awesome-->
+    <script src="https://use.fontawesome.com/99347ac47f.js"></script>
     <!-- Font Icons CSS-->
     <link rel="stylesheet" href="https://file.myfontastic.com/da58YPMQ7U5HY8Rb6UxkNf/icons.css">
     <!-- Tweaks for older IEs--><!--[if lt IE 9]>
@@ -26,6 +27,9 @@
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
   </head>
   <body>
+      <div class="alert-list">
+          <?php include 'PHP/Script/Admin.Registration.php'; ?>
+      </div>
     <div class="page login-page">
       <div class="container d-flex align-items-center">
         <div class="form-holder has-shadow">
@@ -35,9 +39,9 @@
               <div class="info d-flex align-items-center">
                 <div class="content">
                   <div class="logo">
-                    <h1>Dashboard</h1>
+                    <h1>Registration</h1>
                   </div>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                  <p>After the registration the database will be created with the name <mark>&quot;GodSMS&quot;</mark> and you will be redirected to the admin dashboard</p>
                 </div>
               </div>
             </div>
@@ -45,17 +49,21 @@
             <div class="col-lg-6 bg-white">
               <div class="form d-flex align-items-center">
                 <div class="content">
-                  <form id="login-form" method="post">
+                  <form id="register-form" method="post" action="Admin.Registration.php">
                     <div class="form-group">
-                      <input id="login-username" type="text" name="loginUsername" required="" class="input-material">
-                      <label for="login-username" class="label-material">User Name</label>
+                      <input id="register-username" type="text" name="fn" <?php if ($hasVal): ?> value="<?php echo $_POST['fn']; ?>" <?php endif; ?>required class="input-material">
+                      <label for="register-username" class="label-material">FullName</label>
                     </div>
                     <div class="form-group">
-                      <input id="login-password" type="password" name="loginPassword" required="" class="input-material">
-                      <label for="login-password" class="label-material">Password</label>
-                    </div><a id="login" href="index.html" class="btn btn-primary">Login</a>
-                    <!-- This should be submit button but I replaced it with <a> for demo purposes-->
-                  </form><a href="#" class="forgot-pass">Forgot Password?</a><br><small>Do not have an account? </small><a href="register.html" class="signup">Signup</a>
+                      <input id="register-pass" type="password" name="ps" <?php if ($hasVal): ?> value="<?php echo $_POST['ps']; ?>" <?php endif; ?>required class="input-material">
+                      <label for="register-pass" class="label-material">Password</label>
+                    </div>
+                    <div class="form-group">
+                      <input id="register-confi" type="password" name="cn" <?php if ($hasVal): ?> value="<?php echo $_POST['cn']; ?>" <?php endif; ?>required class="input-material">
+                      <label for="register-confi" class="label-material">Confirm password</label>
+                    </div>
+                    <input id="register" type="submit" value="Register" name="Register" class="btn btn-primary">
+                  </form><small>Already have an account? </small><a href="login.html" class="signup">Login</a>
                 </div>
               </div>
             </div>
@@ -63,7 +71,7 @@
         </div>
       </div>
       <div class="copyrights text-center">
-        <p>Design by <a href="https://bootstrapious.com/admin-templates" class="external">Bootstrapious</a></p>
+        <p>Design by <a href="https://bootstrapious.com" class="external">Bootstrapious</a></p>
         <!-- Please do not remove the backlink to us unless you support further theme's development at https://bootstrapious.com/donate. It is part of the license conditions. Thank you for understanding :)-->
       </div>
     </div>

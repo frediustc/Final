@@ -61,7 +61,7 @@ $(document).ready(function () {
     // ------------------------------------------------------ //
     $('#login-form').validate({
         messages: {
-            loginUsername: 'please enter your username',
+            loginUsername: 'please enter your UserId',
             loginPassword: 'please enter your password'
         }
     });
@@ -71,9 +71,9 @@ $(document).ready(function () {
     // ------------------------------------------------------ //
     $('#register-form').validate({
         messages: {
-            registerUsername: 'please enter your first name',
-            registerEmail: 'please enter a vaild Email Address',
-            registerPassword: 'please enter your password'
+            registerUsername: 'please enter your full name',
+            registerEmail: 'please enter your password',
+            registerPassword: 'please retype your password'
         }
     });
 
