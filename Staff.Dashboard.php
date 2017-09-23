@@ -1,4 +1,6 @@
-<?php include './PHP/include/head.php'; ?>
+<?php
+$PH = $PT = 'Teacher Dashboard';
+include './PHP/include/head.php'; ?>
 <section class="dashboard-counts no-padding-bottom">
   <div class="container-fluid">
     <div class="row bg-white has-shadow">

@@ -74,7 +74,7 @@
             <div class="card-body no-padding">
                 <?php
                 $m = array('Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec');
-                $infos = $db->prepare('SELECT * FROM noticeboard ORDER BY createddate DESC LIMIT 5');
+                $infos = $db->prepare('SELECT * FROM noticeboard ORDER BY id DESC LIMIT 5');
                 $infos->execute();
                 while ($info = $infos->fetch()) { ?>
               <!-- Item-->

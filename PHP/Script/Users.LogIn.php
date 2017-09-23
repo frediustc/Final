@@ -14,7 +14,7 @@ if (isset($_POST['Login'])) {
             case 2:
                 header('location: Staff.Dashboard.php');
                 break;
-            case 2:
+            case 3:
                 header('location: Admin.Dashboard.php');
                 break;
             default:

@@ -1,16 +1,20 @@
+<?php if($cu['usertype'] !== 1) {
+        header('location: ./');
+}
+?>
 <!-- Side Navbar -->
 <nav class="side-navbar">
   <!-- Sidebar Header-->
   <div class="sidebar-header d-flex align-items-center">
-    <div class="avatar"><img src="img/avatar-1.jpg" alt="..." class="img-fluid rounded-circle"></div>
+    <div class="avatar"><img src="img/school_logo.png" alt="..." class="img-fluid rounded-circle"></div>
     <div class="title">
-      <h1 class="h4">Mark Stephen</h1>
-      <p>Web Designer</p>
+      <h1 class="h4"><?php echo $cu['fullname'] ?></h1>
+      <p><?php echo $ut[$cu['usertype'] - 1]; ?></p>
     </div>
   </div>
   <!-- Sidebar Navidation Menus--><span class="heading">Main Menu</span>
   <ul class="list-unstyled">
-    <li class="active"> <a href="./"><i class="fa fa-user-circle-o"></i>Dashboard</a></li>
+    <li class="active"> <a href="./Student.Dashboard.php"><i class="fa fa-user-circle-o"></i>Dashboard</a></li>
     <li><a href="#CoursesLink" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-graduation-cap"></i>Courses </a>
       <ul id="CoursesLink" class="collapse list-unstyled">
         <li><a href="Admin.Course.Add.php">Add</a></li>
