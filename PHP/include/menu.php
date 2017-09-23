@@ -38,6 +38,11 @@
     <span class="heading">Interaction</span>
     <li> <a href="Admin.Schedule.View.php"><i class="fa fa-table"></i>Time Tables</a></li>
     <li> <a href="Admin.Reports.View.php"><i class="fa fa-flag"></i>Reports</a></li>
-    <li> <a href="Admin.NoticeBoard.View.php"><i class="fa fa-info-circle"></i>Notice board</a></li>
+    <li><a href="#noticeLink" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-info-circle"></i>Notice board</a>
+      <ul id="noticeLink" class="collapse list-unstyled">
+        <li><a href="Admin.NoticeBoard.Add.php">Add</a></li>
+        <li><a href="Admin.NoticeBoard.View.php">View</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
