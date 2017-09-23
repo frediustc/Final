@@ -61,7 +61,7 @@ $(document).ready(function () {
     // ------------------------------------------------------ //
     $('#login-form').validate({
         messages: {
-            loginUsername: 'please enter your UserId',
+            loginUsername: 'please enter your Id',
             loginPassword: 'please enter your password'
         }
     });

@@ -35,9 +35,9 @@
               <div class="info d-flex align-items-center">
                 <div class="content">
                   <div class="logo">
-                    <h1>Dashboard</h1>
+                    <h1>Login</h1>
                   </div>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                  <p>Insert your Identification data if you do not have them go to see your administrator</p>
                 </div>
               </div>
             </div>
