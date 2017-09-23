@@ -38,6 +38,6 @@
     <span class="heading">Interaction</span>
     <li> <a href="Admin.Schedule.View.php"><i class="fa fa-table"></i>Time Tables</a></li>
     <li> <a href="Admin.Reports.View.php"><i class="fa fa-flag"></i>Reports</a></li>
-    <li> <a href="Admin.Billboard.View.php"><i class="fa fa-info-circle"></i>BillBoards</a></li>
+    <li> <a href="Admin.NoticeBoard.View.php"><i class="fa fa-info-circle"></i>Notice board</a></li>
   </ul>
 </nav>

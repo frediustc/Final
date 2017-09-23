@@ -133,7 +133,7 @@
             </div>
           </div>
           <div class="card-header">
-            <h3 class="h4">Billboard</h3>
+            <h3 class="h4">Notice Board</h3>
           </div>
           <div class="card-body no-padding">
             <!-- Item-->
