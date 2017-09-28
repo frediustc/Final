@@ -17,8 +17,8 @@
       <li <?php if ($PT == 'Teacher Dashboard'): ?> class="active" <?php endif; ?>> <a href="./Staff.Dashboard.php"><i class="fa fa-user-circle-o"></i>Dashboard</a></li>
       <li><a href="#ReportsLink" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-flag"></i>Reports </a>
           <ul id="ReportsLink" class="collapse list-unstyled">
-              <li><a href="Admin.Course.Add.php">Add</a></li>
-              <li><a href="Admin.Course.View.php">View</a></li>
+              <li><a href="Staff.Report.Add.php">Add</a></li>
+              <li><a href="Staff.Report.View.php">View</a></li>
           </ul>
       </li>
       <li <?php if ($PT == 'Teacher Timetable'): ?> class="active" <?php endif; ?>> <a href="Staff.Schedule.View.php"><i class="fa fa-table"></i>Time Tables</a></li>
