@@ -1,6 +1,9 @@
 <?php
 $PH = $PT = 'Teacher Dashboard';
 include './PHP/include/head.php'; ?>
+<div class="alert-list">
+    <?php include 'PHP/Script/Users.Info.Change.php'; ?>
+</div>
 <section class="dashboard-counts no-padding-bottom">
   <div class="container-fluid">
     <div class="row bg-white has-shadow">
@@ -64,7 +67,7 @@ include './PHP/include/head.php'; ?>
                       </div>
                     </div>
                     <div class="card-header d-flex align-items-center">
-                      <h3 class="h4">Horizontal Form</h3>
+                      <h3 class="h4">Change password</h3>
                     </div>
                     <div class="card-body">
                         <?php if (sha1($cu['initpass']) == $cu['password']): ?>
@@ -72,22 +75,22 @@ include './PHP/include/head.php'; ?>
                               <strong>Warning!</strong> Your are using the default password please change it to your own.
                             </div>
                         <?php endif; ?>
-                      <form class="form-horizontal">
+                      <form class="form-horizontal" method="post" action="Staff.Dashboard.php">
                         <div class="form-group row">
                           <label class="col-sm-3 form-control-label">New Password</label>
                           <div class="col-sm-9">
-                            <input type="password" placeholder="Your password" class="form-control form-control-success">
+                            <input type="password" name="psw"placeholder="Your password" class="form-control form-control-success" required>
                           </div>
                         </div>
                         <div class="form-group row">
                           <label class="col-sm-3 form-control-label">Confirm New Password</label>
                           <div class="col-sm-9">
-                            <input type="password" placeholder="Confirm Pasword" class="form-control form-control-warning">
+                            <input type="password" name="cpsw"placeholder="Confirm Pasword" class="form-control form-control-warning" required>
                           </div>
                         </div>
                         <div class="form-group row">
                           <div class="col-sm-9 offset-sm-3">
-                            <input type="submit" value="Signin" class="btn btn-primary">
+                            <input type="submit" value="Change" name="change" class="btn btn-primary">
                           </div>
                         </div>
                       </form>
@@ -147,7 +150,7 @@ include './PHP/include/head.php'; ?>
             <div class="card-body">
               <p>Click on the texts to edit your informations. <br> <small>Informations with (*) can be edited</small></p>
 
-              <form class="form-horizontal" id="persoInfo">
+              <form class="form-horizontal" id="persoInfo"  method="post" action="Staff.Dashboard.php">
                 <div class="form-group row">
                   <label class="col-sm-3 form-control-label">ID</label>
                   <div class="col-sm-9">
