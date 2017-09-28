@@ -31,10 +31,12 @@ if(isset($_POST['addModule'])){
         $add = $db->prepare('INSERT INTO Modules(abbr, name) VALUES(?, ?)');
         if($add->execute(array(strtoupper($abbr), ucwords($name)))){
             echo '<div class="alert alert-success" role="alert"><strong>Success</strong> Module Added!</div>';
+
         }
         else {
             echo '<div class="alert alert-danger" role="alert"><strong>Error</strong> Something went wrong</div>';
         }
+        $add->closeCursor();
     }
     else {
         $hasVal = true;

@@ -55,12 +55,13 @@ if(isset($_POST['addCourse'])){
         $add = $db->prepare('INSERT INTO Courses(abbr, name, price) VALUES(?, ?, ?)');
         if($add->execute(array(strtoupper($abbr), ucwords($name), $price))){
             $id = $db->lastInsertId();
-
+            $add->closeCursor();
             //insert the courseid and module id
             $link = $db->prepare('INSERT INTO coursesmodules(cid, mid) VALUES(?, ?)');
             for ($i=0; $i < count($mod); $i++) {
                 $link->execute(array($id, $mod[$i]));//while we find element in mod we execute the insertion
             }
+            $link->closeCursor();
             echo '<div class="alert alert-success" role="alert"><strong>Success</strong> Course Added!</div>';
         }
         else {

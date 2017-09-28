@@ -62,14 +62,16 @@ if(isset($_POST['addStudent'])){
 
             //insert the payment
             $id = $db->lastInsertId();
+            $add->closeCursor();
             $pay = $db->prepare('INSERT INTO payment(uid, cid, paid) VALUES(?,?,?)');
             $pay->execute(array($id, $_POST['crs'], $fee));
 
             //insert the studentincourse
             $id = $db->lastInsertId();
-            $pay = $db->prepare('INSERT INTO studentincourse(uid, cid, since) VALUES(?,?, NOW())');
-            $pay->execute(array($id, $_POST['crs']));
-
+            $pay->closeCursor();
+            $lk = $db->prepare('INSERT INTO studentincourse(uid, cid, since) VALUES(?,?, NOW())');
+            $lk->execute(array($id, $_POST['crs']));
+            $lk->closeCursor();
             echo '<div class="alert alert-success" role="alert"><strong>Success</strong> Student Added!</div>';
         }
         else {

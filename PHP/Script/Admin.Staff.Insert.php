@@ -79,11 +79,12 @@ if(isset($_POST['addStaff'])){
 
             //insert the studentincourse
             $id = $db->lastInsertId();
+            $add->closeCursor();
             $link = $db->prepare('INSERT INTO teachermodules(uid, mid) VALUES(?,?)');
             for ($i=0; $i < count($mod); $i++) {
                 $link->execute(array($id, $mod[$i]));//while we find element in mod we execute the insertion
             }
-
+            $link->closeCursor();
             echo '<div class="alert alert-success" role="alert"><strong>Success</strong> Student Added!</div>';
         }
         else {

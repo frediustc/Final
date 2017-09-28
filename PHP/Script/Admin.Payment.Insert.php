@@ -18,6 +18,7 @@ if(isset($_POST['pay'])){
         else {
             echo '<div class="alert alert-danger" role="alert"><strong>Error!</strong> Something went wrong</div>';
         }
+        $pay->closeCursor();
     }
     else {
         $hasVal = true;

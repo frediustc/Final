@@ -36,6 +36,7 @@ if(isset($_POST['addReport-2'])){
         if(isset($_POST[$id['uid']])){
             $ins = $db->prepare('INSERT INTO results (mid, uid, result, rid, createdat) VALUES (?,?,?,?, NOW())');
             $ins->execute(array($_POST['md'], $id['uid'], $_POST[$id['uid']], $rid));
+            $ins->closeCursor();
         }
     }
     echo '<div class="alert alert-success" role="alert"><strong>Success!</strong> Marking done</div>';

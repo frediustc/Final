@@ -36,6 +36,7 @@ if(isset($_POST['Register'])){
         else {
             echo '<div class="alert alert-danger" role="alert"><strong>Error</strong> Something went wrong</div>';
         }
+        $add->closeCursor();
     }
     else {
         $hasVal = true;
