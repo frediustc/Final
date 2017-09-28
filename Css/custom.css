@@ -22,3 +22,27 @@ section {
 .timetable section{
     width: calc(100% - 160px);
 }
+form#persoInfo input.form-control{
+    background: transparent;
+    border-color: transparent;
+}
+
+form#persoInfo input.form-control:focus{
+    border-color: #e6e6e6;
+}
+form#persoInfo .form-control-label{
+    padding: 10px 15px;
+}
+form#persoInfo .modulelist{
+    padding: 5px 0;
+}
+form#persoInfo .modulelist li {
+    padding: 5px 15px;
+    background-color: #796AEE;
+    color: white;
+    margin-right: 5px;
+    border-radius: 30px;
+}
+form#persoInfo .display{
+    padding: 10px 20px;
+}
