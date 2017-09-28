@@ -2,49 +2,42 @@
 $PH = $PT = 'Teacher Dashboard';
 include './PHP/include/head.php'; ?>
 <div class="alert-list">
-    <?php include 'PHP/Script/Users.Info.Change.php'; ?>
+    <?php include 'PHP/Script/Users.Info.Change.php';
+    $currentUser = $db->prepare('SELECT * FROM users WHERE id = ?');
+    $currentUser->execute(array($_SESSION['id']));
+    $cu = $currentUser->fetch();
+    ?>
 </div>
 <section class="dashboard-counts no-padding-bottom">
   <div class="container-fluid">
     <div class="row bg-white has-shadow">
         <?php
         $nbrs = $db->prepare('SELECT
-            (SELECT COUNT(*) FROM users WHERE usertype = 1) AS stu,
-            (SELECT COUNT(*) FROM users WHERE usertype = 2) AS sta,
-            (SELECT COUNT(*) FROM modules) AS mds,
-            (SELECT COUNT(*) FROM courses) AS crs
+            (SELECT COUNT(*) FROM teachermodules WHERE uid = ?) AS md,
+            (SELECT COUNT(*) FROM reports WHERE uid = ?) AS rp
         ');
-        $nbrs->execute();
+        $nbrs->execute(array($_SESSION['id'], $_SESSION['id']));
         $nbr = $nbrs->fetch();
          ?>
-      <!-- Item -->
-      <div class="col-md-4 col-xs-6">
-        <div class="item d-flex align-items-center">
-          <div class="icon bg-red"><i class="fa fa-black-tie"></i></div>
-          <div class="title"><span>Unseen<br>Notifications</span>
 
-          </div>
-          <div class="number"><strong><?php echo $nbr['sta']; ?></strong></div>
-        </div>
-      </div>
       <!-- Item -->
-      <div class="col-md-4 col-xs-6">
+      <div class="col-sm-6 col-xs-12">
         <div class="item d-flex align-items-center">
           <div class="icon bg-green"><i class="fa fa-book"></i></div>
           <div class="title"><span>Total<br>Modules</span>
 
           </div>
-          <div class="number"><strong><?php echo $nbr['mds']; ?></strong></div>
+          <div class="number"><strong><?php echo $nbr['md']; ?></strong></div>
         </div>
       </div>
       <!-- Item -->
-      <div class="col-md-4 col-xs-6">
+      <div class="col-6">
         <div class="item d-flex align-items-center">
           <div class="icon bg-orange"><i class="fa fa-graduation-cap"></i></div>
           <div class="title"><span>Total<br>Reports</span>
 
           </div>
-          <div class="number"><strong><?php echo $nbr['crs']; ?></strong></div>
+          <div class="number"><strong><?php echo $nbr['rp']; ?></strong></div>
         </div>
       </div>
       <?php $nbrs->closeCursor(); ?>
@@ -166,13 +159,13 @@ include './PHP/include/head.php'; ?>
                 <div class="form-group row">
                   <label class="col-sm-3 form-control-label">Email*</label>
                   <div class="col-sm-9">
-                    <input type="email" placeholder="Email" class="form-control form-control-warning" required value="<?php echo $cu['email'] ?>">
+                    <input type="email" name="email" placeholder="Email" class="form-control form-control-warning" required value="<?php echo $cu['email'] ?>">
                   </div>
                 </div>
                 <div class="form-group row">
                   <label class="col-sm-3 form-control-label">Phone*</label>
                   <div class="col-sm-9">
-                    <input type="number" placeholder="Phone" class="form-control form-control-warning" required value="<?php echo $cu['phone'] ?>">
+                    <input type="text" name="number" placeholder="Phone" class="form-control form-control-warning" value="<?php echo $cu['phone'] ?>">
                   </div>
                 </div>
                 <div class="form-group row">
@@ -190,15 +183,27 @@ include './PHP/include/head.php'; ?>
                     <label class="col-sm-3 form-control-label">Modules</label>
                     <div class="col-sm-9">
                         <ul class="list-unstyled list-inline modulelist">
-                            <li class="d-inline-block"><small>PHP</small></li>
-                            <li class="d-inline-block"><small>PHP</small></li>
-                            <li class="d-inline-block"><small>PHP</small></li>
+                            <?php
+                            //display modules
+                            $modules = $db->prepare('
+                                SELECT modules.abbr, modules.name
+                                FROM teachermodules
+                                INNER JOIN users ON users.id = teachermodules.uid
+                                INNER JOIN modules ON modules.id = teachermodules.mid
+                                WHERE teachermodules.uid = ?
+                            ');
+
+                            $modules->execute(array($_SESSION['id']));
+
+                            while ($mod = $modules->fetch()) { ?>
+                                <li class="d-inline-block" title="<?php echo $mod['name'] ?>"><small><?php echo $mod['abbr'] ?></small></li>
+                            <?php } ?>
                         </ul>
                     </div>
                 </div>
                 <div class="form-group row">
                   <div class="col-sm-9 offset-sm-3">
-                    <input type="submit" value="Signin" class="btn btn-primary">
+                    <input type="submit" name="pochange" value="Update" class="btn btn-primary">
                   </div>
                 </div>
               </form>

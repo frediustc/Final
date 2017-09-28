@@ -21,6 +21,59 @@ if (isset($_POST['change'])) {
     }
 
 }
+
+if(isset($_POST['pochange'])){
+
+    //check if the person has change is number
+    if(isset($_POST['number']) && !empty($_POST['number'])){
+        $ph = htmlspecialchars(trim($_POST['number']));
+
+        //check if the number has changed then continue
+        if ($ph != $cu['phone']) {
+            if(!preg_match('/^[0-9]{10}$/', $ph)) {
+                $correct = false;
+                echo '<div class="alert alert-danger" role="alert"><strong>Phone Wrong Format!</strong> 10 Numbers (this field is not required)</div>';
+            }
+            else {
+                //update phone number
+                $nb = $db->prepare('UPDATE users SET phone = ? WHERE id = ?');
+                if($nb->execute(array($ph, $_SESSION['id']))){
+                    echo '<div class="alert alert-success" role="alert"><strong>phone!</strong> phone number updated</div>';
+                }
+            }
+        }
+    }
+
+    //check for email
+    $em = htmlspecialchars(trim($_POST['email']));
+
+    if($em != $cu['email']){
+        $ok = true;
+        //check if the email format is correct (letter within 2 and 5 char)
+        if(!preg_match('/(^[a-zA-Z0-9_.+-]+)@([a-zA-Z_-]+).([a-zA-Z]){2,4}$/', $em)) {
+            $ok = false;
+            echo '<div class="alert alert-danger" role="alert"><strong>Email Wrong Format!</strong> must be in example@domain.extension format</div>';
+        }
+
+        //check if the email does not exist
+        $check = $db->prepare('SELECT COUNT(*) AS nbr FROM users WHERE email = ?');
+        $check->execute(array($em));
+        $result = $check->fetch();
+        if($result['nbr'] > 0){
+            $ok = false;
+            echo '<div class="alert alert-danger" role="alert"><strong>Error</strong> Email already exist</div>';
+        }
+
+        if($ok){
+            //update phone number
+            $nb = $db->prepare('UPDATE users SET email = ? WHERE id = ?');
+            if($nb->execute(array($em, $_SESSION['id']))){
+                echo '<div class="alert alert-success" role="alert"><strong>email!</strong> email updated</div>';
+            }
+        }
+    }
+}
+
 if(isset($_POST['changess'])){
     function generateRandomString($length = 16) {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';

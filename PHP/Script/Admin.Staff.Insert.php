@@ -21,7 +21,7 @@ if(isset($_POST['addStaff'])){
     //check if phone format is good if inserted
     if(isset($_POST['ph']) && !empty($_POST['ph'])){
         $ph = htmlspecialchars(trim($_POST['ph']));
-        if(!preg_match('/[0-9]{10}/', $ph)) {
+        if(!preg_match('/^[0-9]{10}$/', $ph)) {
             $correct = false;
             echo '<div class="alert alert-danger" role="alert"><strong>Phone Wrong Format!</strong> 10 Numbers (this field is not required)</div>';
         }
@@ -83,7 +83,7 @@ if(isset($_POST['addStaff'])){
             for ($i=0; $i < count($mod); $i++) {
                 $link->execute(array($id, $mod[$i]));//while we find element in mod we execute the insertion
             }
-            
+
             echo '<div class="alert alert-success" role="alert"><strong>Success</strong> Student Added!</div>';
         }
         else {

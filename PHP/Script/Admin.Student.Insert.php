@@ -17,11 +17,11 @@ if(isset($_POST['addStudent'])){
     $em = strtolower(htmlspecialchars(trim($_POST['em'])));
     $fee = htmlspecialchars(trim($_POST['fee']));
     $ph = '';
-    
+
     //check if phone format is good if inserted
     if(isset($_POST['ph']) && !empty($_POST['ph'])){
         $ph = htmlspecialchars(trim($_POST['ph']));
-        if(!preg_match('/[0-9]{10}/', $ph)) {
+        if(!preg_match('/^[0-9]{10}$/', $ph)) {
             $correct = false;
             echo '<div class="alert alert-danger" role="alert"><strong>Phone Wrong Format!</strong> 10 Numbers (this field is not required)</div>';
         }
