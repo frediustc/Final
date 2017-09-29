@@ -23,7 +23,7 @@
                       <div class="form-group row">
                         <label class="col-sm-3 form-control-label">Teacher</label>
                         <div class="col-sm-9">
-                            <select name="uid" class="form-control">
+                            <select name="uid" class="form-control" required>
                             <?php
                             $teachersSel = $db->prepare('SELECT fullname, id FROM users WHERE usertype = 1 ORDER BY fullname');
                             $teachersSel->execute();
@@ -36,7 +36,7 @@
                     <div class="form-group row">
                       <label class="col-sm-3 form-control-label">Course</label>
                       <div class="col-sm-9">
-                          <select name="cid" class="form-control">
+                          <select name="cid" class="form-control" required>
                           <?php
                           $coursesSel = $db->prepare('SELECT abbr, id FROM courses ORDER BY abbr');
                           $coursesSel->execute();

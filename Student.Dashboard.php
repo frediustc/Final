@@ -146,21 +146,7 @@ include './PHP/include/head.php'; ?>
                 <div class="form-group row">
                     <label class="col-sm-3 form-control-label">Course</label>
                     <div class="col-sm-9">
-                        <?php
-                        //display modules
-                        $courses = $db->prepare('
-                            SELECT courses.abbr, courses.name
-                            FROM studentincourse
-                            INNER JOIN users ON users.id = studentincourse.uid
-                            INNER JOIN courses ON courses.id = studentincourse.cid
-                            WHERE studentincourse.uid = ?
-                            ORDER BY studentincourse.since DESC LIMIT 1
-                        ');
-
-                        $courses->execute(array($_SESSION['id']));
-                        $crs = $courses->fetch();
-                        $_SESSION['c'] = $crs['abbr'];
-                        ?>
+                        
 
                         <p class="display" title="<?php echo $crs['name'] ?>"><?php echo $crs['abbr'] ?></p>
                     </div>

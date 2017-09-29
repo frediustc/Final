@@ -74,7 +74,7 @@
                           <form class="roomViewForm" method="post" action="Admin.Schedule.View.php">
                             <label class="form-control-label">Rooms</label>
                             <div class="form-group">
-                                <select name="rid" class="roomView form-control">
+                                <select required name="rid" class="roomView form-control">
                                 <?php
                                 $roomsView = $db->prepare('SELECT * FROM rooms ORDER BY room');
                                 $roomsView->execute();
@@ -117,7 +117,7 @@
                               <div class="form-group row">
                                 <label class="col-sm-3 form-control-label">Module</label>
                                 <div class="col-sm-9">
-                                    <select name="m" class="form-control">
+                                    <select required name="m" class="form-control">
                                     <?php
                                     $modulesSel = $db->prepare('SELECT abbr FROM modules ORDER BY abbr');
                                     $modulesSel->execute();
@@ -130,7 +130,7 @@
                             <div class="form-group row">
                               <label class="col-sm-3 form-control-label">Room</label>
                               <div class="col-sm-9">
-                                  <select name="rid" class="form-control">
+                                  <select required name="rid" class="form-control">
                                   <?php
                                   $roomsSel = $db->prepare('SELECT * FROM rooms ORDER BY room');
                                   $roomsSel->execute();
@@ -149,7 +149,7 @@
                             <div class="form-group row">
                               <label class="col-sm-3 form-control-label">Day</label>
                               <div class="col-sm-9">
-                                  <select name="d" class="form-control">
+                                  <select required name="d" class="form-control">
                                   <?php
                                   $daysSel = $db->prepare('SELECT day FROM days');
                                   $daysSel->execute();
@@ -162,7 +162,7 @@
                             <div class="form-group row">
                               <label class="col-sm-3 form-control-label">Course</label>
                               <div class="col-sm-9">
-                                  <select name="c" class="form-control">
+                                  <select required name="c" class="form-control">
                                   <?php
                                   $coursesSel = $db->prepare('SELECT abbr, id FROM courses ORDER BY abbr');
                                   $coursesSel->execute();
@@ -175,7 +175,7 @@
                             <div class="form-group row">
                               <label class="col-sm-3 form-control-label">Teacher</label>
                               <div class="col-sm-9">
-                                  <select name="uid" class="form-control">
+                                  <select required name="uid" class="form-control">
                                   <?php
                                   $teachersSel = $db->prepare('SELECT fullname, id FROM users WHERE usertype = 2 ORDER BY fullname');
                                   $teachersSel->execute();

@@ -46,3 +46,12 @@ form#persoInfo .modulelist li {
 form#persoInfo .display{
     padding: 10px 20px;
 }
+.text-white .text small{
+    color: white;
+}
+.statistic {
+    padding: 10px 15px;
+}
+.changecrs {
+    cursor: pointer;
+}

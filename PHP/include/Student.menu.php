@@ -1,6 +1,21 @@
 <?php if($cu['usertype'] != 1) {
         header('location: ./');
 }
+
+//display course
+$courses = $db->prepare('
+    SELECT courses.abbr, courses.id, courses.name
+    FROM studentincourse
+    INNER JOIN users ON users.id = studentincourse.uid
+    INNER JOIN courses ON courses.id = studentincourse.cid
+    WHERE studentincourse.uid = ?
+    ORDER BY studentincourse.since DESC LIMIT 1
+');
+
+$courses->execute(array($_SESSION['id']));
+$crs = $courses->fetch();
+$_SESSION['c'] = $crs['abbr'];
+
 ?>
 <!-- Side Navbar -->
 <nav class="side-navbar">
@@ -14,13 +29,8 @@
   </div>
   <!-- Sidebar Navidation Menus--><span class="heading">Main Menu</span>
   <ul class="list-unstyled">
-      <li <?php if ($PT == 'Teacher Dashboard'): ?> class="active" <?php endif; ?>> <a href="./Student.Dashboard.php"><i class="fa fa-user-circle-o"></i>Dashboard</a></li>
-      <li><a href="#ReportsLink" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-flag"></i>Reports </a>
-          <ul id="ReportsLink" class="collapse list-unstyled">
-              <li><a href="Student.Report.Add.php">Add</a></li>
-              <li><a href="Student.Report.View.php">View</a></li>
-          </ul>
-      </li>
-      <li <?php if ($PT == 'Teacher Timetable'): ?> class="active" <?php endif; ?>> <a href="Student.Schedule.View.php"><i class="fa fa-table"></i>Time Tables</a></li>
+      <li <?php if ($PT == 'Student Dashboard'): ?> class="active" <?php endif; ?>> <a href="./Student.Dashboard.php"><i class="fa fa-user-circle-o"></i>Dashboard</a></li>
+      <li <?php if ($PT == 'Student Results'): ?> class="active" <?php endif; ?>> <a href="Student.Results.View.php?id=<?php echo $crs['id'] ?>"><i class="fa fa-flag"></i>Results</a></li>
+      <li <?php if ($PT == 'Student Timetable'): ?> class="active" <?php endif; ?>> <a href="Student.Schedule.View.php"><i class="fa fa-table"></i>Time Tables</a></li>
   </ul>
 </nav>

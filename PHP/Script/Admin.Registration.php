@@ -1,6 +1,7 @@
 <?php
 $hasVal = false;
 if(isset($_POST['Register'])){
+    require 'PHP/include/db.php';
     $correct = true;
 
     $ut = 3;
@@ -31,7 +32,9 @@ if(isset($_POST['Register'])){
 
         $add = $db->prepare('INSERT INTO users(fullname, email, gender, phone, initpass, password, registdate, usertype) VALUES(?, "admin@admin.com", "M", 0123456789, "undefined", ?, NOW(), ?)');
         if($add->execute(array(ucwords($fn) ,sha1($ps), $ut))){
-            echo '<div class="alert alert-success" role="alert"><strong>Success</strong> Student Added!</div>';
+            $_SESSION['id'] = $db->lastInsertId();
+            $add->closeCursor();
+            header('location: Admin.Dashboard.php');
         }
         else {
             echo '<div class="alert alert-danger" role="alert"><strong>Error</strong> Something went wrong</div>';

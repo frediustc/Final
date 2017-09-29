@@ -8,11 +8,18 @@
 <script src="js/bootstrap.min.js"></script>
 <script src="js/jquery.cookie.js"> </script>
 <script src="js/jquery.validate.min.js"></script>
-<!-- <script src="js/Chart.min.js"></script>
-<script src="js/charts-home.js"></script> -->
+<script src="js/Chart.min.js"></script>
 <script src="js/front.js"></script>
 <script src="js/timetable.min.js"></script>
 
+<?php
+//view the student Chart
+if(isset($studentResult)){
+    include 'PHP/include/Student.Result.Chart.Footer.php';
+ }
+?>
+
+<!-- timetable -->
 <script type="text/javascript">
     var timetable = new Timetable();
     var days = [];
