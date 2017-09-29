@@ -7,7 +7,6 @@ include './PHP/include/head.php'; ?>
         <div class="row">
             <div class="col">
                 <div class="card">
-
                     <div class="card-header d-flex align-items-center">
                       <h3 class="h4">Time Table</h3>
                     </div>
@@ -20,5 +19,5 @@ include './PHP/include/head.php'; ?>
     </div>
 </section>
 <?php
-$teacherSchedule = true;
+$studentSchedule = true;
 include './PHP/include/footer.php'; ?>

@@ -37,8 +37,8 @@
         $events->execute(array($_SESSION['id']));
     }
     if(isset($studentSchedule)) {
-        $events = $db->prepare('SELECT * FROM timetable WHERE rid = ?');
-        $events->execute(array($_SESSION['rv']));
+        $events = $db->prepare('SELECT * FROM timetable WHERE c = ?');
+        $events->execute(array($_SESSION['c']));
     }
     if(!isset($teacherSchedule) && !isset($studentSchedule)){
         //loop through the events for the admin

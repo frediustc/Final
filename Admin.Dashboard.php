@@ -96,31 +96,7 @@
             </div>
           </div>
         </div>
-        <!-- <div class="col-lg-4">
-          <div class="client card">
-            <div class="card-close">
-              <div class="dropdown">
-                <button type="button" id="closeCard" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-ellipsis-v"></i></button>
-                <div aria-labelledby="closeCard" class="dropdown-menu has-shadow"><a href="#" class="dropdown-item remove"> <i class="fa fa-times"></i>Close</a><a href="#" class="dropdown-item edit"> <i class="fa fa-gear"></i>Edit</a></div>
-              </div>
-            </div>
-            <div class="card-header d-flex align-items-center">
-              <h2 class="h3">My Profile</h2>
-            </div>
-            <div class="card-body text-center">
-              <div class="client-avatar"><img src="img/avatar-2.jpg" alt="..." class="img-fluid rounded-circle">
-                <div class="status bg-green"></div>
-              </div>
-              <div class="client-title">
-                <h3>Jason Doe</h3>
-                <span>Administrator</span>
-                <p class="profile-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                <a href="#">Edit</a>
-              </div>
-            </div>
-          </div>
-        </div> -->
-        <!-- Recent Post-->
+        
         <div class="col-lg-6">
           <div class="articles card">
             <div class="card-close">

@@ -158,7 +158,9 @@ include './PHP/include/head.php'; ?>
                         ');
 
                         $courses->execute(array($_SESSION['id']));
-                        $crs = $courses->fetch(); ?>
+                        $crs = $courses->fetch();
+                        $_SESSION['c'] = $crs['abbr'];
+                        ?>
 
                         <p class="display" title="<?php echo $crs['name'] ?>"><?php echo $crs['abbr'] ?></p>
                     </div>
