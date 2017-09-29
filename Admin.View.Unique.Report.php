@@ -1,4 +1,16 @@
-<?php include './PHP/include/head.php'; ?>
+<?php
+if(!isset($_GET['id'])){
+    header('location: Admin.Reports.View.php');
+}
+if(empty($_GET['id']) || (int)$_GET['id'] <= 0){
+    header('location: Admin.Reports.View.php');
+}
+
+include './PHP/include/head.php';
+
+$view = $db->prepare('UPDATE reports SET view = "1" WHERE id = ?');
+$view->execute(array($_GET['id']));
+?>
 <section class="tables">
   <div class="container-fluid">
     <div class="row">
@@ -11,35 +23,36 @@
               </div>
             </div>
             <div class="card-header d-flex align-items-center">
-              <h3 class="h4">Reports List</h3>
+              <h3 class="h4">Report Informations</h3>
             </div>
             <div class="card-body">
               <table class="table table-striped table-hover text-capitalize">
                 <thead>
                   <tr>
                     <th>#</th>
-                    <th>Module</th>
-                    <th>Description</th>
-                    <th>View</th>
+                    <th>Fullname</th>
+                    <th>Mark</th>
+                    <th>date</th>
                   </tr>
                 </thead>
                 <tbody>
                     <?php
                     //display modules
                     $reports = $db->prepare('
-                    SELECT reports.id, modules.abbr, reports.description, reports.view
-                    FROM reports
-                    INNER JOIN modules ON modules.id = reports.mid
-                    ORDER BY reports.view');
-                    $reports->execute();
+                    SELECT users.fullname, results.result, results.createdat
+                    FROM results
+                    INNER JOIN users ON users.id = results.uid
+                    INNER JOIN reports ON reports.id = results.rid
+                    WHERE reports.id = ? ORDER BY users.fullname');
+                    $reports->execute(array($_GET['id']));
                     $i = 0;
                     while ($report = $reports->fetch()) { $i++; ?>
                         <tr>
 
                             <th scope="row"><?php echo $i; ?></th>
-                            <td><?php echo $report['abbr']; ?></td>
-                            <td><a href="Admin.View.Unique.Report.php?id=<?php echo $report['id']; ?>"> <?php echo $report['description']; ?> </a></td>
-                            <td><?php echo $report['view'] == 0 ? 'Unseen' : 'Seen'; ?></td>
+                            <td><?php echo $report['fullname']; ?></td>
+                            <td><?php echo $report['result']; ?> / 100</td>
+                            <td><?php echo $report['createdat']; ?></td>
                         </tr>
                     <?php } ?>
                 </tbody>

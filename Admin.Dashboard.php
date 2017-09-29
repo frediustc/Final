@@ -131,35 +131,31 @@
             </div>
             <div class="card-header d-flex align-items-center">
               <h2 class="h3">Lastest Teacher Reports</h2>
-              <div class="badge badge-rounded bg-green">3 New</div>
             </div>
             <div class="card-body no-padding">
-              <div class="item d-flex align-items-center">
-                <div class="image"><img src="img/avatar-1.jpg" alt="..." class="img-fluid rounded-circle"></div>
+                <?php
+                $reports = $db->prepare('
+                SELECT users.fullname, reports.description
+                FROM reports
+                INNER JOIN users ON users.id = reports.uid
+                WHERE reports.view = "0"
+                ORDER BY reports.id DESC
+                LIMIT 5
+                ');
+
+                $reports->execute();
+                while ($report = $reports->fetch()) { ?>
+                <div class="item d-flex align-items-center">
+
+                <div class="image"><img src="img/school_logo.png" alt="school logo" class="img-fluid rounded-circle"></div>
                 <div class="text">
-                    <a href="#">
-                        <h3 class="h5">Mister Patric</h3>
-                        <small>Result of the L5DBIT
-                            <div class="badge badge-rounded bg-green">New</div>
-                        </small>
-                    </a>
+                    <h3 class="h5"><a href="#"><?php echo $report['fullname'] ?></a></h3>
+                    <small><a href="#"><?php echo $report['description'] ?>
+                        <div class="badge badge-rounded bg-green">New</div></a>
+                    </small>
                 </div>
               </div>
-              <div class="item d-flex align-items-center">
-                <div class="image"><img src="img/avatar-2.jpg" alt="..." class="img-fluid rounded-circle"></div>
-                <div class="text"><a href="#">
-                    <h3 class="h5">Lorem Ipsum Dolor</h3></a><small>Posted on 5th June 2017 by Frank Williams.   </small></div>
-              </div>
-              <div class="item d-flex align-items-center">
-                <div class="image"><img src="img/avatar-3.jpg" alt="..." class="img-fluid rounded-circle"></div>
-                <div class="text"><a href="#">
-                    <h3 class="h5">Lorem Ipsum Dolor</h3></a><small>Posted on 5th June 2017 by Ashley Wood.   </small></div>
-              </div>
-              <div class="item d-flex align-items-center">
-                <div class="image"><img src="img/avatar-3.jpg" alt="..." class="img-fluid rounded-circle"></div>
-                <div class="text"><a href="#">
-                    <h3 class="h5">Lorem Ipsum Dolor</h3></a><small>Posted on 5th June 2017 by Ashley Wood.   </small></div>
-              </div>
+          <?php } ?>
             </div>
           </div>
         </div>
