@@ -1,4 +1,7 @@
-<?php include './PHP/include/head.php'; ?>
+<?php
+$PH = 'Add Courses';
+$PT = 'Administrator Courses';
+ include './PHP/include/head.php'; ?>
 <div class="alert-list">
     <?php include 'PHP/Script/Admin.Course.Insert.php'; ?>
 </div>

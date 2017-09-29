@@ -1,4 +1,7 @@
-<?php include './PHP/include/head.php'; ?>
+<?php
+$PH = 'View Students';
+$PT = 'Administrator Students';
+ include './PHP/include/head.php'; ?>
 <section class="tables">
   <div class="container-fluid">
     <div class="row">

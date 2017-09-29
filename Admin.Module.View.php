@@ -1,4 +1,7 @@
-<?php include './PHP/include/head.php'; ?>
+<?php
+$PH = 'View Modules';
+$PT = 'Administrator Modules';
+ include './PHP/include/head.php'; ?>
 <section class="tables">
   <div class="container-fluid">
     <div class="row">

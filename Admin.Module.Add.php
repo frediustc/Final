@@ -1,4 +1,7 @@
-<?php include './PHP/include/head.php'; ?>
+<?php
+$PH = 'Add Modules';
+$PT = 'Administrator Modules';
+ include './PHP/include/head.php'; ?>
 <div class="alert-list">
     <?php include 'PHP/Script/Admin.Module.Insert.php'; ?>
 </div>
