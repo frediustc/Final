@@ -26,8 +26,8 @@ if(isset($_POST['addReport-2'])){
         'crs' => $_POST['crs']
     );
 
-    $rep = $db->prepare('INSERT INTO reports (uid, description) VALUES(?,?)');
-    $rep->execute(array($_SESSION['id'], $_POST['desc']));
+    $rep = $db->prepare('INSERT INTO reports (uid, description, mid) VALUES(?,?,?)');
+    $rep->execute(array($_SESSION['id'], $_POST['desc'], $_POST['md']));
     $rid = $db->lastInsertId();
 
     $usersid = $db->prepare('SELECT uid FROM studentincourse WHERE cid = ?');
@@ -40,5 +40,6 @@ if(isset($_POST['addReport-2'])){
         }
     }
     echo '<div class="alert alert-success" role="alert"><strong>Success!</strong> Marking done</div>';
+    $step_0 = true;
 }
 ?>

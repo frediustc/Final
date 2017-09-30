@@ -17,7 +17,7 @@ $PT = 'Administrator Staff';
               <h3 class="h4">Students List</h3>
             </div>
             <div class="card-body">
-              <table class="table table-striped table-hover text-capitalize">
+              <table class="table table-striped table-hover">
                 <thead>
                   <tr>
                     <th>#</th>

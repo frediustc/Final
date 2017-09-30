@@ -57,17 +57,16 @@ if(isset($_POST['addStudent'])){
     //if all is alright ($correct === true) we insert the value
     if($correct){
         $ip = generateRandomString();
-        $add = $db->prepare('INSERT INTO users(fullname, email, gender, phone, initpass, password, registdate, usertype) VALUES(?, ?, ?, ?, ?, ?, NOW(), ?)');
-        if($add->execute(array(ucwords($fn), $em, $_POST['gd'], $ph, $ip, sha1($ip), $ut))){
+        $stdadd = $db->prepare('INSERT INTO users(fullname, email, gender, phone, initpass, password, registdate, usertype) VALUES(?, ?, ?, ?, ?, ?, NOW(), ?)');
+        if($stdadd->execute(array(ucwords($fn), $em, $_POST['gd'], $ph, $ip, sha1($ip), $ut))){
 
             //insert the payment
             $id = $db->lastInsertId();
-            $add->closeCursor();
+            $stdadd->closeCursor();
             $pay = $db->prepare('INSERT INTO payment(uid, cid, paid) VALUES(?,?,?)');
             $pay->execute(array($id, $_POST['crs'], $fee));
 
             //insert the studentincourse
-            $id = $db->lastInsertId();
             $pay->closeCursor();
             $lk = $db->prepare('INSERT INTO studentincourse(uid, cid, since) VALUES(?,?, NOW())');
             $lk->execute(array($id, $_POST['crs']));

@@ -6,7 +6,7 @@
     <div class="container-fluid">
         <div class="row justify-content-center">
             <!-- STEP 1 -->
-            <?php if (!isset($step_1) && !isset($_POST['addReport-2'])): ?>
+            <?php if ((!isset($step_1) && !isset($_POST['addReport-2'])) || isset($step_0)): ?>
                 <div class="col-lg-6">
                   <div class="card">
                     <div class="card-close">
@@ -60,7 +60,7 @@
                 </div>
             <?php endif; ?>
             <!-- STEP2 -->
-            <?php if (isset($step_1) || isset($_POST['addReport-2'])): ?>
+            <?php if ((isset($step_1) || isset($_POST['addReport-2'])) && !isset($step_0)): ?>
                 <div class="col-lg-6">
                   <div class="card">
                     <div class="card-close">
