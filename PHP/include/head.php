@@ -34,7 +34,7 @@ $_SESSION['t'] = $cu['usertype'];
     <link rel="shortcut icon" href="img/favicon.ico">
     <!-- Font Awesome CDN-->
     <!-- you can replace it by local Font Awesome-->
-    <link rel="stylesheet" href="Css/fa47/css/font-awesome.css" id="theme-stylesheet">
+    <link rel="stylesheet" href="Css/fa47/css/font-awesome.min.css" id="theme-stylesheet">
     <!-- Tweaks for older IEs--><!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
