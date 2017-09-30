@@ -13,6 +13,9 @@ if(empty($_GET['cid']) || (int)$_GET['cid'] <= 0){
 }
 $PH = $PT = 'Student Results';
 include './PHP/include/head.php';
+if($cu['usertype'] == 1){
+    header('location: Student.Dashboard.php');
+}
 ?>
 
 <section class="no-padding-bottom">

@@ -1,7 +1,7 @@
 <?php
 $PH = 'Add Students';
 $PT = 'Administrator Students';
- include './PHP/include/head.php'; ?>
+ include './PHP/include/head.php'; include './PHP/include/checkAdmin.php'; ?>
 <div class="alert-list">
     <?php include 'PHP/Script/Admin.Student.Insert.php'; ?>
 </div>

@@ -1,6 +1,6 @@
 <?php
 $PH = $PT = 'Student Dashboard';
-include './PHP/include/head.php'; ?>
+include './PHP/include/head.php'; include './PHP/include/checkStd.php'; ?>
 <div class="alert-list">
     <?php include 'PHP/Script/Users.Info.Change.php';
     $currentUser = $db->prepare('SELECT * FROM users WHERE id = ?');
@@ -146,7 +146,7 @@ include './PHP/include/head.php'; ?>
                 <div class="form-group row">
                     <label class="col-sm-3 form-control-label">Course</label>
                     <div class="col-sm-9">
-                        
+
 
                         <p class="display" title="<?php echo $crs['name'] ?>"><?php echo $crs['abbr'] ?></p>
                     </div>

@@ -9,6 +9,7 @@ $cu = $currentUser->fetch();
 $ut = array('Student', 'Teacher', 'Administrator');
 $PT = isset($PT) ? $PT : 'GodSMS';
 $PH = isset($PH) ? $PH : '';
+$_SESSION['t'] = $cu['usertype'];
 ?>
 <!DOCTYPE html>
 <html>

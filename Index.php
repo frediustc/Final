@@ -1,4 +1,18 @@
-<?php include 'PHP/include/db.php'; ?>
+<?php include 'PHP/include/db.php';
+    if(isset($_SESSION['id'])){
+        switch ($_SESSION['t']) {
+            case 1:
+                header('location: Student.Dashboard.php');
+                break;
+            case 2:
+                header('location: Staff.Dashboard.php');
+                break;
+            case 3:
+                header('location: Admin.Dashboard.php');
+                break;
+        }
+    }
+?>
 <!DOCTYPE html>
 <html>
 <head>

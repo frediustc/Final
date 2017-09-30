@@ -1,7 +1,7 @@
 <?php
 $PT = 'Teacher Reports';
 $PH = 'View Reports';
-include './PHP/include/head.php'; ?>
+include './PHP/include/head.php'; include './PHP/include/checkEmp.php'; ?>
 <section class="tables">
   <div class="container-fluid">
     <div class="row">

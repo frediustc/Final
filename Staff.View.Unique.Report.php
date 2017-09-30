@@ -5,7 +5,7 @@ if(!isset($_GET['id'])){
 if(empty($_GET['id']) || (int)$_GET['id'] <= 0){
     header('location: Staff.Report.View.php');
 }
-include './PHP/include/head.php';
+include './PHP/include/head.php'; include './PHP/include/checkEmp.php';
 ?>
 <section class="tables">
   <div class="container-fluid">
@@ -35,18 +35,22 @@ include './PHP/include/head.php';
                     <?php
                     //display modules
                     $reports = $db->prepare('
-                    SELECT users.fullname, results.result, results.createdat
+                    SELECT users.fullname, users.id AS uid, results.result, results.createdat
                     FROM results
                     INNER JOIN users ON users.id = results.uid
                     INNER JOIN reports ON reports.id = results.rid
                     WHERE reports.id = ? ORDER BY users.fullname');
                     $reports->execute(array($_GET['id']));
                     $i = 0;
-                    while ($report = $reports->fetch()) { $i++; ?>
+                    while ($report = $reports->fetch()) { $i++;
+                        $cids = $db->prepare('SELECT cid FROM studentincourse WHERE uid = ? ORDER BY since DESC LIMIT 1');
+                        $cids->execute(array($report['uid']));
+                        $cid = $cids->fetch();
+                        ?>
                         <tr>
 
                             <th scope="row"><?php echo $i; ?></th>
-                            <td><?php echo $report['fullname']; ?></td>
+                            <td><a href="Admin_staff.Student.Results.View.php?uid=<?php echo $report['uid']; ?>&cid=<?php echo $cid['cid']; ?>"><?php echo $report['fullname']; ?></a></td>
                             <td><?php echo $report['result']; ?> / 100</td>
                             <td><?php echo $report['createdat']; ?></td>
                         </tr>

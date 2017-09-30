@@ -6,7 +6,7 @@ if(empty($_GET['id']) || (int)$_GET['id'] <= 0){
     header('location: Student.Dashboard.php');
 }
 $PH = $PT = 'Student Results';
-include './PHP/include/head.php'; ?>
+include './PHP/include/head.php'; include './PHP/include/checkStd.php'; ?>
 
 <section class="no-padding-bottom">
     <div class="container-fluid">

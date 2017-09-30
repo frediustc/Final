@@ -1,4 +1,4 @@
-<?php include './PHP/include/head.php'; ?>
+<?php include './PHP/include/head.php'; include './PHP/include/checkAdmin.php'; ?>
 <section class="dashboard-counts no-padding-bottom">
   <div class="container-fluid">
     <div class="row bg-white has-shadow">

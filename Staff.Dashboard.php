@@ -1,6 +1,6 @@
 <?php
 $PH = $PT = 'Teacher Dashboard';
-include './PHP/include/head.php'; ?>
+include './PHP/include/head.php'; include './PHP/include/checkEmp.php'; ?>
 <div class="alert-list">
     <?php include 'PHP/Script/Users.Info.Change.php';
     $currentUser = $db->prepare('SELECT * FROM users WHERE id = ?');

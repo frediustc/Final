@@ -6,11 +6,10 @@ if(empty($_GET['id']) || (int)$_GET['id'] <= 0){
     header('location: Admin.Reports.View.php');
 }
 
-include './PHP/include/head.php';
+include './PHP/include/head.php'; include './PHP/include/checkAdmin.php';
 
 $view = $db->prepare('UPDATE reports SET view = "1" WHERE id = ?');
-$view->execute(array($_GET['id']));
-?>
+$view->execute(array($_GET['id'])); ?>
 <section class="tables">
   <div class="container-fluid">
     <div class="row">

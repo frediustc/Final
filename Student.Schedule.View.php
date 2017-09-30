@@ -1,6 +1,6 @@
 <?php
 $PH = $PT = 'Student Timetable';
-include './PHP/include/head.php'; ?>
+include './PHP/include/head.php'; include './PHP/include/checkStd.php'; ?>
 <section>
     <div class="container-fluid">
         <!-- show time table -->

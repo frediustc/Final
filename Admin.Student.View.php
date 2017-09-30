@@ -1,7 +1,7 @@
 <?php
 $PH = 'View Students';
 $PT = 'Administrator Students';
- include './PHP/include/head.php'; ?>
+ include './PHP/include/head.php'; include './PHP/include/checkAdmin.php'; ?>
 <section class="tables">
   <div class="container-fluid">
     <div class="row">

@@ -1,4 +1,4 @@
-<?php include './PHP/include/head.php'; ?>
+<?php include './PHP/include/head.php'; include './PHP/include/checkAdmin.php'; ?>
 <div class="alert-list">
     <?php include 'PHP/Script/Admin.Payment.Insert.php'; ?>
 </div>
