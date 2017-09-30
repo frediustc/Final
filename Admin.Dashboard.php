@@ -96,7 +96,7 @@
             </div>
           </div>
         </div>
-        
+
         <div class="col-lg-6">
           <div class="articles card">
             <div class="card-close">
@@ -111,7 +111,7 @@
             <div class="card-body no-padding">
                 <?php
                 $reports = $db->prepare('
-                SELECT users.fullname, reports.description
+                SELECT users.fullname, reports.description, reports.id
                 FROM reports
                 INNER JOIN users ON users.id = reports.uid
                 WHERE reports.view = "0"
@@ -125,8 +125,8 @@
 
                 <div class="image"><img src="img/school_logo.png" alt="school logo" class="img-fluid rounded-circle"></div>
                 <div class="text">
-                    <h3 class="h5"><a href="#"><?php echo $report['fullname'] ?></a></h3>
-                    <small><a href="#"><?php echo $report['description'] ?>
+                    <h3 class="h5"><?php echo $report['fullname'] ?></h3>
+                    <small><a href="Admin.View.Unique.Report.php?id=<?php echo $report['id'] ?>"><?php echo $report['description'] ?>
                         <div class="badge badge-rounded bg-green">New</div></a>
                     </small>
                 </div>

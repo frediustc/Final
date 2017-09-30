@@ -26,12 +26,16 @@
                 <tbody>
                     <?php
                     //display modules
-                    $payments = $db->prepare('SELECT users.fullname, courses.abbr, payment.id, payment.paid FROM payment INNER JOIN users ON users.id = payment.uid INNER JOIN courses ON courses.id = payment.cid ORDER BY payment.id DESC');
+                    $payments = $db->prepare('SELECT users.fullname, users.id AS uid, courses.abbr, payment.id, payment.paid FROM payment INNER JOIN users ON users.id = payment.uid INNER JOIN courses ON courses.id = payment.cid ORDER BY payment.id DESC');
                     $payments->execute();
-                    while ($payment = $payments->fetch()) { ?>
+                    while ($payment = $payments->fetch()) {
+                        $cids = $db->prepare('SELECT cid FROM studentincourse WHERE uid = ? ORDER BY since DESC LIMIT 1');
+                        $cids->execute(array($payment['uid']));
+                        $cid = $cids->fetch();
+                        ?>
                         <tr>
                             <th scope="row"><?php echo $payment['id']; ?></th>
-                            <td><?php echo $payment['fullname']; ?></td>
+                            <td><a href="Admin_staff.Student.Results.View.php?uid=<?php echo $payment['uid']; ?>&cid=<?php echo $cid['cid']; ?>"><?php echo $payment['fullname']; ?></a></td>
                             <td><?php echo $payment['abbr']; ?></td>
                             <td><?php echo $payment['paid']; ?>Ghc</td>
                         </tr>

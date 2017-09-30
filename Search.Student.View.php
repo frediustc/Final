@@ -1,7 +1,18 @@
 <?php
-$PH = 'View Students';
-$PT = 'Administrator Students';
- include './PHP/include/head.php'; ?>
+$PH = 'Search Result';
+$PT = 'Search';
+if(!isset($_POST['q'])){
+    header('location: Admin.Dashboard.php');
+}
+if(empty(trim($_POST['q']))){
+    header('location: Admin.Dashboard.php');
+}
+
+include './PHP/include/head.php';
+if($cu['usertype'] == 1){
+    header('location: Student.Dashboard.php');
+}
+?>
 <section class="tables">
   <div class="container-fluid">
     <div class="row">
@@ -33,9 +44,11 @@ $PT = 'Administrator Students';
                 <tbody>
 
                     <?php
+                    $q = htmlspecialchars(trim($_POST['q']));
+                    $query = '%' . $q . '%';
                     //loop trough all the students
-                    $users = $db->prepare('SELECT * FROM users WHERE usertype = 1 ORDER BY fullname');
-                    $users->execute();
+                    $users = $db->prepare('SELECT * FROM users WHERE fullname LIKE ? AND usertype = 1 ORDER BY fullname');
+                    $users->execute(array($query));
 
                     while ($user = $users->fetch()) {
                         $cids = $db->prepare('SELECT cid FROM studentincourse WHERE uid = ? ORDER BY since DESC LIMIT 1');

@@ -17,6 +17,11 @@
 if(isset($studentResult)){
     include 'PHP/include/Student.Result.Chart.Footer.php';
  }
+
+//view the student Chart
+if(isset($adminEmpStudentResult)){
+    include 'PHP/include/Admin_Staff.Student.Result.Chart.Footer.php';
+ }
 ?>
 
 <!-- timetable -->
