@@ -23,11 +23,23 @@ include './PHP/include/head.php'; ?>
                 <h3 class="h4">Select the Course</h3>
               </div>
               <div class="card-body">
-                <form class="form-inline">
+                <form class="form-inline" method="get" action="Student.Results.View.php">
                   <div class="form-group">
-                      <select class="form-control" name="level">
-                          <option value="L4DB">L4DB</option>
-                          <option value="L5DB">L5DB</option>
+                      <select class="form-control" name="id">
+                          <?php
+                          $seeCrs = $db->prepare('
+                              SELECT courses.abbr, courses.id
+                              FROM studentincourse
+                              INNER JOIN users ON users.id = studentincourse.uid
+                              INNER JOIN courses ON courses.id = studentincourse.cid
+                              WHERE studentincourse.uid = ?
+                              ORDER BY studentincourse.since DESC
+                          ');
+
+                          $seeCrs->execute(array($_SESSION['id']));
+                          while ($Scrs = $seeCrs->fetch()) { ?>
+                              <option value="<?php echo $Scrs['id'] ?>"><?php echo $Scrs['abbr'] ?></option>
+                          <?php } ?>
                       </select>
                   </div>
                   <div class="form-group">
@@ -46,18 +58,22 @@ include './PHP/include/head.php'; ?>
     <div class="row">
       <!-- Statistics -->
       <div class="statistics col-lg-3 col-12">
-        <div class="statistic d-flex align-items-center bg-red text-white has-shadow changecrs" id="EOM">
-          <div class="text"><small>Applications</small></div>
-        </div>
-        <div class="statistic d-flex align-items-center bg-green text-white has-shadow changecrs" id="UBO">
-          <div class="text"><small>Interviews</small></div>
-        </div>
-        <div class="statistic d-flex align-items-center bg-blue text-white has-shadow changecrs" id="ISO">
-          <div class="text"><small>Forwards</small></div>
-        </div>
-        <div class="statistic d-flex align-items-center bg-orange text-white has-shadow changecrs" id="JS">
-          <div class="text"><small>Forwards</small></div>
-        </div>
+          <?php
+          $seeMods = $db->prepare('
+          SELECT DISTINCT modules.abbr
+          FROM coursesmodules
+          INNER JOIN modules ON modules.id = coursesmodules.mid
+          INNER JOIN courses ON courses.id = coursesmodules.cid
+          WHERE courses.id = ? LIMIT 4
+          ');
+          $i = 0;
+          $colors = array('red', 'green', 'blue', 'orange');
+          $seeMods->execute(array($_GET['id']));
+          while ($seeMod = $seeMods->fetch()) { ?>
+              <div class="statistic d-flex align-items-center bg-<?php echo $colors[$i] ?> text-white has-shadow changecrs" id="<?php echo $seeMod['abbr'] ?>">
+                <div class="text"><small><?php echo $seeMod['abbr'] ?></small></div>
+              </div>
+        <?php $i++; } ?>
       </div>
       <!-- Line Chart            -->
       <div class="chart col-lg-9 col-12">

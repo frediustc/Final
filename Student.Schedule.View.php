@@ -1,5 +1,5 @@
 <?php
-$PH = $PT = 'Teacher Timetable';
+$PH = $PT = 'Student Timetable';
 include './PHP/include/head.php'; ?>
 <section>
     <div class="container-fluid">

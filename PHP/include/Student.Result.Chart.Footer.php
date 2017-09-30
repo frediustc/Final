@@ -1,7 +1,3 @@
-
-
-
-
 <!-- chart student result -->
 <script>
     var
@@ -56,7 +52,7 @@
                     labels: _labels,
                     datasets: [{
                         label: _label,
-                        lineTension: 0,
+                        // lineTension: 0,
                         backgroundColor: 'transparent',
                         borderColor: _colors[<?php echo $i ?>],
                         data: _data,
@@ -69,13 +65,11 @@
                 });
                 _labels = [];
                 _data = [];
-                console.log("<?php echo $m['abbr'] ?>");
+
             <?php }
             ?>
 
         <?php $i++; } ?>
-
-    console.log(_datas);
 
     //function to rebuild the chart
     function createChart(id){
@@ -93,7 +87,6 @@
 
     $('.changecrs').click(function(){
         var _id = this.id;
-        console.log(_mods.indexOf(_id), _id, _mods);
         if(_mods.indexOf(_id) !== -1){
             createChart(_mods.indexOf(_id));
         }

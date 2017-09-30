@@ -15,7 +15,7 @@
   <!-- Sidebar Navidation Menus--><span class="heading">Main Menu</span>
   <ul class="list-unstyled">
       <li <?php if ($PT == 'Teacher Dashboard'): ?> class="active" <?php endif; ?>> <a href="./Staff.Dashboard.php"><i class="fa fa-user-circle-o"></i>Dashboard</a></li>
-      <li><a href="#ReportsLink" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-flag"></i>Reports </a>
+      <li <?php if ($PT == 'Teacher Reports'): ?> class="active" <?php endif; ?>><a href="#ReportsLink" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-flag"></i>Reports </a>
           <ul id="ReportsLink" class="collapse list-unstyled">
               <li><a href="Staff.Report.Add.php">Add</a></li>
               <li><a href="Staff.Report.View.php">View</a></li>
